@@ -219,8 +219,7 @@
   const augmentedPosts = $derived.by(() => {
     return posts.map((post) => {
       const extras: string[] = [];
-      for (const link of post.links ?? []) {
-        if (!link || !link.name || !link.link) continue;
+      for (const link of post.links) {
         const t = LINK_TAG_MAP[link.name];
         if (t) extras.push(t);
       }
@@ -736,18 +735,12 @@
   // Clipboard shortcuts: c, C, x, X — different summary verbosities.
   function shortSummary(post: Post): string {
     let sb = `* **${post.name}**: ([review](${post.abslink}), `;
-    for (const link of post.links) {
-      if (!link || !link.name || !link.link) continue;
-      sb += `[${link.name}](${link.link}), `;
-    }
+    for (const link of post.links) sb += `[${link.name}](${link.link}), `;
     return sb.slice(0, -2) + `): ${post.description}\n`;
   }
   function longSummary(post: Post): string {
     let sb = `### **${post.name}** ｜  by *${post.author}*\n\n**Links:** [review](${post.abslink}), `;
-    for (const link of post.links) {
-      if (!link || !link.name || !link.link) continue;
-      sb += `[${link.name}](${link.link}), `;
-    }
+    for (const link of post.links) sb += `[${link.name}](${link.link}), `;
     sb = sb.slice(0, -2) + '\n\n';
     sb += `**Summary:** ${post.description}\n\n`;
     sb += `**Hook:** ${post.sentence}\n\n*********\n`;
@@ -755,10 +748,7 @@
   }
   function superShortSummary(post: Post): string {
     let sb = `* **${post.name}**: [review](${post.abslink}), `;
-    for (const link of post.links) {
-      if (!link || !link.name || !link.link) continue;
-      sb += `[${link.name}](${link.link}), `;
-    }
+    for (const link of post.links) sb += `[${link.name}](${link.link}), `;
     return sb.slice(0, -2) + '\n';
   }
   function superDuperShortSummary(post: Post): string {
@@ -827,6 +817,16 @@
   function bookChipState(value: BookFilter): ChipState {
     return chipState(bookFilter === value, bookFilter !== 'all');
   }
+
+  // Keep the tier list visually centered and narrower when the list is short.
+  const tierListMaxWidth = $derived.by(() => {
+    const count = visiblePosts.length;
+    if (count <= 4) return '34rem';   // ~544px
+    if (count <= 8) return '46rem';   // ~736px
+    if (count <= 12) return '60rem';  // ~960px
+    if (count <= 18) return '72rem';  // ~1152px
+    return '84rem';                   // ~1344px
+  });
 </script>
 
 <div id="preamble">
@@ -1102,51 +1102,54 @@
 
 <div
   id="all-card-wrapper"
-  class={layout === 'tier' ? 'mt-8 flex flex-col gap-4' : ''}
+  class="{layout === 'tier' ? 'mt-8 flex flex-col gap-1' : ''}
+         {capturing ? 'screenshotting' : ''}"
 >
-  {#each groupedPosts as group, gi (group.tier)}
+  {#each groupedPosts as group, gi (group.tier ?? gi)}
     {#if layout === 'tier' && group.tier}
+      <!-- overflow-clip (not -hidden) so the sticky label still works:
+           overflow:hidden makes this row the sticky element's scroll
+           container, which never scrolls, so the label would never stick. -->
       <section
-        class="tier-row flex rounded-md overflow-hidden bg-green-800/50"
-        aria-label={`Tier ${group.tier}`}
+        class="tier-row flex rounded-md overflow-clip bg-green-800/50"
+        aria-label="Tier {group.tier}"
       >
         <div
-          class="tier-label flex-none w-16 sm:w-20 flex items-center justify-center text-center"
-          style:background={`linear-gradient(${TIER_LABEL_STYLES[group.tier].grad})`}
+          class="tier-label flex-none w-16 sm:w-28 flex flex-col justify-center"
+          style:--tier-grad={TIER_LABEL_STYLES[group.tier].grad}
           style:--tier-scrim={TIER_LABEL_STYLES[group.tier].scrim}
         >
-          <div class="sticky top-4 bottom-4 flex flex-col items-center gap-1 px-2">
+          <!-- Sticky keeps the tier letter visible while scrolling tall
+               tiers (C spans several screens). Both insets matter: bottom-4
+               pins the (flex-centered, so initially below the fold) label
+               near the viewport bottom while entering a tall row, top-4
+               takes over when scrolling past. Small offsets only — a large
+               one (e.g. 40vh) shoves the label of short rows that sit above
+               the line to the cell bottom instead of centering. -->
+          <div class="sticky top-4 bottom-4 flex flex-col items-center gap-1 p-2 text-center">
             <span class="text-3xl sm:text-5xl font-bold text-green-50">{group.tier}</span>
-            <span class="sr-only sm:not-sr-only text-sm leading-tight text-green-100/80">
+            <span class="sr-only sm:not-sr-only text-sm leading-tight text-green-50/80">
               {TIER_DESCRIPTIONS[group.tier]}
             </span>
           </div>
         </div>
-
         <div
-          class="tier-grid grow grid content-start gap-1 p-1 sm:gap-2 sm:p-2"
-          style:grid-template-columns={`repeat(${Math.max(3, Math.min(6, Math.ceil(group.posts.length / 2)))}, minmax(0, 1fr))`}
+          class="tier-grid grow grid content-start gap-1 px-1
+                 grid-cols-3 sm:grid-cols-cover-cards-tier"
         >
-          {#each group.posts as post (post.abslink)}
-            <ReviewCard
-              {...post}
-              layout={layout}
-              isBookmarked={readingList.has(slugFromAbslink(post.abslink))}
-              onToggleBookmark={layout === 'tier' ? undefined : toggleBookmark}
-            />
-          {/each}
+          {@render cards(group.posts)}
         </div>
       </section>
     {:else}
-      <div data-capture-root class="mx-auto mt-20 grid ...">
-        {#each group.posts as post (post.abslink)}
-          <ReviewCard
-            {...post}
-            layout={layout}
-            isBookmarked={readingList.has(slugFromAbslink(post.abslink))}
-            onToggleBookmark={toggleBookmark}
-          />
-        {/each}
+      {@const cols =
+        layout === 'wide'
+          ? 'sm:grid-cols-wide-cards grid-cols-wide-cards-mobile'
+          : 'grid-cols-cover-cards-mobile sm:grid-cols-cover-cards'}
+      <div
+        data-capture-root
+        class="container mx-auto justify-center grid mt-20 gap-4 sm:gap-12 {cols}"
+      >
+        {@render cards(group.posts)}
       </div>
     {/if}
   {/each}
