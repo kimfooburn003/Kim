@@ -595,12 +595,7 @@
     showReadingList = false;
     completionFilter = 'all';
     formatActivations = {};
-    sourceActivations = {
-      amazon: false,
-      audiobook: false,
-      'royal-road': false,
-      ao3: false,
-    };    
+    sourceActivations = {}; 
     bookFilter = 'series';
   }
 
