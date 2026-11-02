@@ -1102,15 +1102,14 @@
 
 <div
   id="all-card-wrapper"
-  class={layout === 'tier' ? 'mt-8 flex w-full justify-center' : ''}
+  class="{layout === 'tier' ? 'mt-8 flex flex-col gap-1' : ''}
 >
   {#if layout === 'tier'}
     <div class="w-full max-w-[34rem] sm:max-w-[46rem] lg:max-w-[60rem] xl:max-w-[72rem] 2xl:max-w-[84rem] px-2 mx-auto">
       {#each groupedPosts as group, gi (group.tier)}
         {#if group.tier}
           <section
-            class="tier-row flex rounded-md overflow-hidden bg-green-800/50"
-            aria-label={`Tier ${group.tier}`}
+            class="tier-row flex rounded-md overflow-clip bg-green-800/50"
           >
             <div
               class="tier-label flex-none w-16 sm:w-20 flex items-center justify-center text-center"
