@@ -135,6 +135,19 @@ body {
   }
 }
 
+.tag-group {
+  @apply w-full;
+}
+
+.tag-group + .tag-group {
+  margin-top: 0.5rem;
+}
+
+.tag-group--status {
+  margin-top: 1rem;
+}
+
+
 .tag-list {
   /* @apply flex flex-wrap justify-center; */
   @apply flex flex-wrap justify-center gap-x-1 gap-y-1;
