@@ -991,39 +991,7 @@
   </div>
 </div>
 
-<div id="tags" class="tag-list max-w-7xl mx-auto mt-5 ">
-  {#each allTags as tag (tag)}
-    <button
-      type="button"
-      class="tag tag-{tag} {activeClass(tag)} hover:cursor-pointer text-base sm:text-sm"
-      onclick={() => clickTag(tag)}
-    >
-      <span>{tag}</span>
-    </button>
-  {/each}
-
-  {#each availableProgressionTags as tag}
-    <button
-      type="button"
-      class={`filter-chip progression-chip ${progressionChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
-      onclick={() => clickProgressionTag(tag)}
-    >
-       <span>{PROGRESSION_LABELS[tag]}</span>
-    </button>
-  {/each}
-
-  {#each availableProtagonistTags as tag}
-    <button
-       type="button"
-       class={`filter-chip protagonist-chip ${protagonistChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
-       onclick={() => clickProtagonistTag(tag)}
-     >
-       <span>{PROTAGONIST_LABELS[tag]}</span>
-     </button>
-  {/each}
-</div>
-
-<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
+<div id="tags" class="tag-list max-w-7xl mx-auto mb-5 mt-5">  
   <button
     type="button"
     class={`filter-chip book-chip ${bookChipState('series')} hover:cursor-pointer text-base sm:text-sm`}
@@ -1084,6 +1052,38 @@
     >
       <span>{FORMAT_LABELS[tag]}</span>
     </button>
+  {/each}
+</div>
+
+<div id="tags" class="tag-list max-w-7xl mx-auto mb-5 ">
+  {#each allTags as tag (tag)}
+    <button
+      type="button"
+      class="tag tag-{tag} {activeClass(tag)} hover:cursor-pointer text-base sm:text-sm"
+      onclick={() => clickTag(tag)}
+    >
+      <span>{tag}</span>
+    </button>
+  {/each}
+
+  {#each availableProgressionTags as tag}
+    <button
+      type="button"
+      class={`filter-chip progression-chip ${progressionChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
+      onclick={() => clickProgressionTag(tag)}
+    >
+       <span>{PROGRESSION_LABELS[tag]}</span>
+    </button>
+  {/each}
+
+  {#each availableProtagonistTags as tag}
+    <button
+       type="button"
+       class={`filter-chip protagonist-chip ${protagonistChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
+       onclick={() => clickProtagonistTag(tag)}
+     >
+       <span>{PROTAGONIST_LABELS[tag]}</span>
+     </button>
   {/each}
 </div>
 
