@@ -43,13 +43,9 @@ const similarReviews = getSimilarReviews(entry, allEntries, 4);
 // ships one string rather than the formatting logic. `entry.body` is the raw
 // markdown source, matching what the Hugo template pasted in via `.RawContent`.
 const abslink = new URL(`/reviews/${entry.id}/`, Astro.site!).toString();
-const safeLinks = Object.entries(entry.data.links ?? {})
-  .filter(([, link]) => typeof link === 'string' && link.trim().length > 0)
-  .map(([name, link]) => ({ name, link: String(link) }));
-
 const linkList = [
   `[review](${abslink})`,
-  ...safeLinks.map(({ name, link }) => `[${name}](${link})`),
+  ...Object.entries(entry.data.links).map(([name, link]) => `[${name}](${link})`),
 ].join(', ');
 const reviewMarkdown =
   `# **${entry.data.name}**\n\n` +
@@ -80,7 +76,7 @@ const reviewMarkdown =
               </div>
               <p class="text-lg text-green-400">{entry.data.description}</p>
               <div class="text-base">
-                {safeLinks.map(({ name, link }) => (
+                {Object.entries(entry.data.links).map(([name, link]) => (
                   <a
                     class={`no-under btn-xs text-sm text-white bg-${r}-700 hover:bg-${r}-600 mt-2 mr-4`}
                     href={link}
