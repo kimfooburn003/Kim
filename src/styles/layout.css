@@ -162,7 +162,7 @@ body {
     }
   }
   .protagonist-chip {
-    @apply text-green-50 bg-green-400 font-medium;
+    @apply text-cream-50 bg-green-400 font-medium;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
     }
@@ -175,7 +175,7 @@ body {
   }
 
   .progression-chip {
-    @apply text-accent-50 bg-accent-700 font-medium;
+    @apply text-cream-50 bg-accent-700 font-medium;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
     }
