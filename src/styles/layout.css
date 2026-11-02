@@ -148,7 +148,7 @@ body {
   
   .tag,
   .filter-chip {
-     @apply text-accent-900 bg-cream-300;
+     @apply text-cream-100 bg-cream-600;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
       background-image: none;
@@ -162,7 +162,7 @@ body {
     }
   }
   .protagonist-chip {
-    @apply bg-cream-600 text-cream-50 font-medium;
+    @apply text-green-50 bg-green-600 font-medium;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
     }
@@ -175,7 +175,7 @@ body {
   }
 
   .progression-chip {
-    @apply bg-green-200 text-cream-900 font-medium;
+    @apply text-accent-50 bg-accent-600 font-medium;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
     }
