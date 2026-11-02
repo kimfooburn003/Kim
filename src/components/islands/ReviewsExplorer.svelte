@@ -298,7 +298,7 @@
     readingList: SvelteSet<string>;
     showReadingList: boolean;
     completionFilter: CompletionFilter;
-    sourceActivations: Record<string, boolean>;
+    sourceActivations: Record<SourceTag, boolean>;
     bookFilter: BookFilter;
   } {
     const out = {
@@ -313,7 +313,7 @@
       readingList: new SvelteSet<string>(),
       showReadingList: false,
       completionFilter: 'all' as CompletionFilter,
-      sourceActivations: {} as Record<string, boolean>,
+      sourceActivations: {} as Record<SourceTag, boolean>,
       bookFilter: 'series' as BookFilter,
     };
     if (typeof window === 'undefined') return out;
@@ -328,7 +328,16 @@
     }
     if (params.has('source')) {
       for (const t of params.get('source')!.split('_').filter(Boolean)) {
-        out.sourceActivations[t] = true;
+        if (SOURCE_TAGS.includes(t as SourceTag)) {
+          out.sourceActivations[t as SourceTag] = true;
+        }
+      }
+    }
+    if (params.has('source-exclude')) {
+      for (const t of params.get('source-exclude')!.split('_').filter(Boolean)) {
+        if (SOURCE_TAGS.includes(t as SourceTag)) {
+          out.sourceActivations[t as SourceTag] = false;
+        }
       }
     }
     if (params.has('format')) {
@@ -407,12 +416,7 @@
   let readingList = $state<SvelteSet<string>>(initial.readingList);
   let showReadingList = $state(initial.showReadingList);
   let completionFilter = $state<CompletionFilter>(initial.completionFilter);
-  let sourceActivations = $state<Record<SourceTag, boolean>>({
-    amazon: false,
-    audiobook: false,
-    'royal-road': false,
-    ao3: false,
-  });  
+  let sourceActivations = $state<Record<SourceTag, boolean>>({ ...initial.sourceActivations });
   let bookFilter = $state<BookFilter>(initial.bookFilter);
 
   // Sync state → URL whenever any of these change.
@@ -424,11 +428,14 @@
     if (completionFilter !== 'all') params.set('status', completionFilter);
     if (bookFilter !== 'all') params.set('book', bookFilter);
   
-    const activeSources = Object.entries(sourceActivations)
-      .filter(([, active]) => active)
-      .map(([tag]) => tag);
-  
-    if (activeSources.length) params.set('source', activeSources.join('_'));
+    const sourceInclude: string[] = [];
+    const sourceExclude: string[] = [];
+    for (const [k, v] of Object.entries(sourceActivations)) {
+      if (v === true) sourceInclude.push(k);
+      else if (v === false) sourceExclude.push(k);
+    }
+    if (sourceInclude.length) params.set('source', sourceInclude.join('_'));
+    if (sourceExclude.length) params.set('source-exclude', sourceExclude.join('_'));
 
     const activeFormats = Object.entries(formatActivations)
       .filter(([, active]) => active)
@@ -563,6 +570,20 @@
     }
   }
 
+  function clickSourceTag(tag: SourceTag) {
+    if (tag in sourceActivations) {
+      if (sourceActivations[tag] === true) {
+        sourceActivations = { ...sourceActivations, [tag]: false };
+      } else {
+        const next = { ...sourceActivations };
+        delete next[tag];
+        sourceActivations = next;
+      }
+    } else {
+      sourceActivations = { ...sourceActivations, [tag]: true };
+    }
+  }
+
   function reset() {
     tagActivations = {};
     protagonistActivations = {};
@@ -635,13 +656,9 @@
         if (bookFilter === 'series' && !post.tags.includes('series')) {
           return false;
         }
-        const activeSources = Object.entries(sourceActivations)
-          .filter(([, active]) => active)
-          .map(([tag]) => tag as SourceTag);
-
-        if (activeSources.length) {
-          const matchesAnySource = activeSources.some((tag) => post.tags.includes(tag));
-          if (!matchesAnySource) return false;
+        for (const [tag, active] of Object.entries(sourceActivations)) {
+          if (active === true && !post.tags.includes(tag)) return false;
+          if (active === false && post.tags.includes(tag)) return false;
         }
 
         for (const [tag, active] of Object.entries(formatActivations)) {
@@ -789,9 +806,9 @@
   }
 
   function formatChipState(tag: FormatTag): ChipState {
-    if (Object.keys(formatActivations).length === 0) return 'active-nan';
-    if (formatActivations[tag] === true) return 'active-true';
-    if (formatActivations[tag] === false) return 'active-false';
+    if (Object.keys(sourceActivations).length === 0) return 'active-nan';
+    if (sourceActivations[tag] === true) return 'active-true';
+    if (sourceActivations[tag] === false) return 'active-false';
     return 'active-undefined';
   }
   
@@ -1045,12 +1062,7 @@
     <button
       type="button"
       class={`filter-chip source-chip ${sourceChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
-      onclick={() => {
-        sourceActivations = {
-          ...sourceActivations,
-          [tag]: !sourceActivations[tag],
-        };
-      }}
+      onclick={() => clickSourceTag(tag)}
     >
       <span>{SOURCE_LABELS[tag]}</span>
     </button>
