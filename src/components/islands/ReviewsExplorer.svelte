@@ -258,6 +258,7 @@
     ...FORMAT_TAGS,
     ...PROTAGONIST_TAGS,
     ...PROGRESSION_TAGS,
+    ...availableYearTags,
     'book',
     'series',
   ] as const;
