@@ -998,20 +998,20 @@
   {/each}
 </div>
 
-<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">
-  <button
-    type="button"
-    class={`filter-chip book-chip ${bookChipState('book')} hover:cursor-pointer text-base sm:text-sm`}
-    onclick={() => (bookFilter = bookFilter === 'book' ? 'all' : 'book')}
-  >
-    <span>book</span>
-  </button>
+<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
   <button
     type="button"
     class={`filter-chip book-chip ${bookChipState('series')} hover:cursor-pointer text-base sm:text-sm`}
     onclick={() => (bookFilter = bookFilter === 'series' ? 'all' : 'series')}
   >
     <span>series</span>
+  </button>
+  <button
+    type="button"
+    class={`filter-chip book-chip ${bookChipState('book')} hover:cursor-pointer text-base sm:text-sm`}
+    onclick={() => (bookFilter = bookFilter === 'book' ? 'all' : 'book')}
+  >
+    <span>book</span>
   </button>
 
   {#each availableYearTags as tag}
