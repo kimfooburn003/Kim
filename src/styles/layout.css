@@ -244,7 +244,7 @@ body {
   }
 
   .source-chip {
-    @apply border-2 text-accent-50 border-accent-400/80 bg-transparent;  
+    @apply border-2 text-accent-50 border-accent-400/80 bg-accent-800/80;  
     &.active-true {
       @apply text-accent-50 bg-accent-700 border-accent-400;
     }  
