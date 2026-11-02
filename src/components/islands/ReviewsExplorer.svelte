@@ -992,16 +992,6 @@
     </button>
   {/each}
 
-  {#each availableProtagonistTags as tag}
-    <button
-      type="button"
-      class={`filter-chip protagonist-chip ${protagonistChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
-      onclick={() => clickProtagonistTag(tag)}
-    >
-      <span>{PROTAGONIST_LABELS[tag]}</span>
-    </button>
-  {/each}
-
   {#each availableProgressionTags as tag}
     <button
       type="button"
@@ -1012,6 +1002,16 @@
     </button>
   {/each}
 </div>
+
+{#each availableProtagonistTags as tag}
+  <button
+     type="button"
+     class={`filter-chip protagonist-chip ${protagonistChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
+     onclick={() => clickProtagonistTag(tag)}
+   >
+     <span>{PROTAGONIST_LABELS[tag]}</span>
+   </button>
+{/each}
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
   <button
