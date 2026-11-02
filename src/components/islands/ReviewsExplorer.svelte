@@ -735,12 +735,18 @@
   // Clipboard shortcuts: c, C, x, X — different summary verbosities.
   function shortSummary(post: Post): string {
     let sb = `* **${post.name}**: ([review](${post.abslink}), `;
-    for (const link of post.links) sb += `[${link.name}](${link.link}), `;
+    for (const link of post.links) {
+      if (!link || !link.name || !link.link) continue;
+      sb += `[${link.name}](${link.link}), `;
+    }
     return sb.slice(0, -2) + `): ${post.description}\n`;
   }
   function longSummary(post: Post): string {
     let sb = `### **${post.name}** ｜  by *${post.author}*\n\n**Links:** [review](${post.abslink}), `;
-    for (const link of post.links) sb += `[${link.name}](${link.link}), `;
+    for (const link of post.links) {
+      if (!link || !link.name || !link.link) continue;
+      sb += `[${link.name}](${link.link}), `;
+    }
     sb = sb.slice(0, -2) + '\n\n';
     sb += `**Summary:** ${post.description}\n\n`;
     sb += `**Hook:** ${post.sentence}\n\n*********\n`;
@@ -748,7 +754,10 @@
   }
   function superShortSummary(post: Post): string {
     let sb = `* **${post.name}**: [review](${post.abslink}), `;
-    for (const link of post.links) sb += `[${link.name}](${link.link}), `;
+    for (const link of post.links) {
+      if (!link || !link.name || !link.link) continue;
+      sb += `[${link.name}](${link.link}), `;
+    }
     return sb.slice(0, -2) + '\n';
   }
   function superDuperShortSummary(post: Post): string {
