@@ -248,7 +248,9 @@ body {
     &.active-true {
       @apply text-accent-50 bg-accent-700 border-accent-400;
     }  
-    &.active-false,
+    &.active-false{
+      @apply text-cream-50 bg-accent-500;
+    }
     &.active-undefined {
       @apply text-accent-100 border-accent-400/80 bg-accent-800/80;
     }
