@@ -1102,7 +1102,7 @@
 
 <div
   id="all-card-wrapper"
-  class="{layout === 'tier' ? 'mt-8 flex flex-col gap-1' : ''}
+  class="{layout === 'tier' ? 'mt-8 flex w-full justify-center' : ''}
          {capturing ? 'screenshotting' : ''}"
 >
   {#each groupedPosts as group, gi (group.tier ?? gi)}
@@ -1111,7 +1111,7 @@
            overflow:hidden makes this row the sticky element's scroll
            container, which never scrolls, so the label would never stick. -->
       <section
-        class="tier-row flex rounded-md overflow-clip bg-green-800/50"
+        class="tier-row flex w-full max-w-[34rem] sm:max-w-[46rem] lg:max-w-[60rem] xl:max-w-[72rem] 2xl:max-w-[84rem] rounded-md overflow-hidden bg-green-800/50 mx-auto"
         aria-label="Tier {group.tier}"
       >
         <div
