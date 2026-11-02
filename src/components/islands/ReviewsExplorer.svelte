@@ -91,6 +91,8 @@
     ).sort((a, b) => Number(b) - Number(a))
   );
 
+  const currentYear = String(new Date().getFullYear());
+
   type FormatTag =
     | 'fanfic'
     | 'webnovel'
@@ -366,6 +368,12 @@
         out.yearActivations[t] = true;
       }
     }
+    if (
+      Object.keys(out.yearActivations).length === 0 &&
+      availableYearTags.includes(currentYear)
+    ) {
+      out.yearActivations[currentYear] = true;
+    }
     if (params.has('book')) {
       const book = params.get('book');
       if (book === 'book' || book === 'series') {
@@ -588,7 +596,9 @@
     tagActivations = {};
     protagonistActivations = {};
     progressionActivations = {};
-    yearActivations = {};
+    yearActivations = availableYearTags.includes(currentYear)
+      ? { [currentYear]: true }
+      : {};
     searchTerm = '';
     layout = defaultLayout;
     byRank = true;
