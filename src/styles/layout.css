@@ -162,7 +162,7 @@ body {
     }
   }
   .protagonist-chip {
-    @apply text-green-50 bg-green-500 font-medium;
+    @apply text-green-50 bg-green-400 font-medium;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
     }
