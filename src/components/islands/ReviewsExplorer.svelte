@@ -1154,6 +1154,6 @@
           />
         {/each}
       </div>
-   {/each}
- {/if}
+    {/each}
+  {/if}
 </div>
