@@ -817,6 +817,16 @@
   function bookChipState(value: BookFilter): ChipState {
     return chipState(bookFilter === value, bookFilter !== 'all');
   }
+
+  // Keep the tier list visually centered and narrower when the list is short.
+  const tierListMaxWidth = $derived.by(() => {
+    const count = visiblePosts.length;
+    if (count <= 4) return '34rem';   // ~544px
+    if (count <= 8) return '46rem';   // ~736px
+    if (count <= 12) return '60rem';  // ~960px
+    if (count <= 18) return '72rem';  // ~1152px
+    return '84rem';                   // ~1344px
+  });
 </script>
 
 <div id="preamble">
