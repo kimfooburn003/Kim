@@ -314,7 +314,7 @@
       showReadingList: false,
       completionFilter: 'all' as CompletionFilter,
       sourceActivations: {} as Record<string, boolean>,
-      bookFilter: 'all' as BookFilter,
+      bookFilter: 'series' as BookFilter,
     };
     if (typeof window === 'undefined') return out;
     const params = new URLSearchParams(window.location.search);
@@ -580,7 +580,7 @@
       'royal-road': false,
       ao3: false,
     };    
-    bookFilter = 'all';
+    bookFilter = 'series';
   }
 
   // Screenshot export: capture the whole card list (not just the viewport)
