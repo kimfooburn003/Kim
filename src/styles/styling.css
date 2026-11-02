@@ -357,6 +357,40 @@
     hsl(308, 75.5%, 79.2%)
   );
 }
+
+/* genre tags */
+.tag-time-loops,
+.tag-magic-school,
+.tag-slice-of-life,
+.tag-litrpg,
+.tag-cultivation,
+.tag-crafting,
+.tag-sci-fi,
+.tag-cyberpunk,
+.tag-pf-adjacent,
+.tag-superhero,
+.tag-wholesome,
+.tag-isekai,
+.tag-vrmmo{
+  @apply bg-cream-600 text-accent-100 font-medium;
+}  
+/* protagonist type */
+.tag-ensemble-cast,
+.tag-female-lead,
+.tag-male-lead,
+.tag-non-human-lead {
+  @apply bg-accent-600 text-accent-100 font-medium;
+}  
+/* progression type */
+.tag-dungeon-core,
+.tag-kingdom-building,
+.tag-community-building,
+.tag-relationship-building,
+.tag-weak-to-strong,
+.tag-poor-to-rich{
+  @apply bg-green-600 text-green-100 font-medium;
+}  
+  
 /* book source */
 .tag-amazon,
 .tag-royal-road,
@@ -386,22 +420,6 @@
 .tag-manhwa-kr {
   @apply bg-cream-600 text-cream-50 font-medium;
 }   
-/* progression type */
-.tag-dungeon-core,
-.tag-kingdom-building,
-.tag-community-building,
-.tag-relationship-building,
-.tag-weak-to-strong,
-.tag-poor-to-rich{
-  @apply bg-cream-600 text-cream-50 font-medium;
-}  
-/* protagonist type */
-.tag-ensemble-cast,
-.tag-female-lead,
-.tag-male-lead,
-.tag-non-human-lead {
-  @apply bg-cream-100 text-accent-900 font-medium;
-}  
 /* year */
 .tag-2015,
 .tag-2016,
@@ -421,27 +439,6 @@
 .tag-2031{
   @apply bg-cream-100 text-accent-900 font-medium;
 }    
-  
-.tag-snippet,
-.tag-time-loops,
-.tag-magic-school,
-.tag-slice-of-life,
-.tag-litrpg,
-.tag-cultivation,
-.tag-hard-magic,
-.tag-companion,
-.tag-crafting,
-.tag-sci-fi,
-.tag-cyberpunk,
-.tag-pf-adjacent,
-.tag-system-apocalypse,
-.tag-superhero,
-.tag-wholesome,
-.tag-isekai,
-.tag-vrmmo,
-.tag-parody {
-  @apply bg-cream-100 text-accent-900 font-medium;
-}
   
 /* Turn white images to dark mode */
 .img-invert {
