@@ -1043,7 +1043,9 @@
       <span>{SOURCE_LABELS[tag]}</span>
     </button>
   {/each}  
+</div>
 
+<div id="tags" class="tag-list max-w-7xl mx-auto">
   {#each availableFormatTags as tag}
     <button
       type="button"
