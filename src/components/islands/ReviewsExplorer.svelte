@@ -991,7 +991,8 @@
   </div>
 </div>
 
-<div id="tags" class="tag-list max-w-7xl mx-auto mb-5 mt-5">  
+<div class="tag-group tag-group--main">
+<div class="tag-list max-w-7xl mx-auto mt-5 ">
   <button
     type="button"
     class={`filter-chip book-chip ${bookChipState('series')} hover:cursor-pointer text-base sm:text-sm`}
@@ -1006,7 +1007,7 @@
   >
     <span>book</span>
   </button>
-
+  
   <button
     type="button"
     class={`filter-chip completion-chip ${completionChipState('completed')} hover:cursor-pointer text-base sm:text-sm`}
@@ -1023,7 +1024,11 @@
   >
     <span>ongoing</span>
   </button>
+</div>
+</div>
 
+<div class="tag-group tag-group--source">
+<div class="tag-list max-w-7xl mx-auto mb-5">
   {#each availableYearTags as tag}
     <button
       type="button"
@@ -1043,9 +1048,7 @@
       <span>{SOURCE_LABELS[tag]}</span>
     </button>
   {/each}  
-</div>
 
-<div id="tags" class="tag-list max-w-7xl mx-auto">
   {#each availableFormatTags as tag}
     <button
       type="button"
@@ -1055,6 +1058,7 @@
       <span>{FORMAT_LABELS[tag]}</span>
     </button>
   {/each}
+</div>
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mb-5 ">
