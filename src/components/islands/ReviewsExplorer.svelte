@@ -802,7 +802,10 @@
   }
   
   function sourceChipState(tag: SourceTag): ChipState {
-    return chipState(sourceActivations[tag], Object.values(sourceActivations).some(Boolean));
+    if (Object.keys(sourceActivations).length === 0) return 'active-nan';
+    if (sourceActivations[tag] === true) return 'active-true';
+    if (sourceActivations[tag] === false) return 'active-false';
+    return 'active-undefined';
   }
 
   function formatChipState(tag: FormatTag): ChipState {
