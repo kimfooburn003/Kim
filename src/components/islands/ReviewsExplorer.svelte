@@ -1088,7 +1088,7 @@
 </div>
 
 {#snippet cards(posts: Post[])}
-  {#each posts as post (post.link)}
+  {#each posts as post (post.abslink)}
     <!-- No bookmark button in tier mode: the 150px tiles are too small
          for the overlay and the board should read as covers only. -->
     <ReviewCard
@@ -1129,7 +1129,7 @@
               class="tier-grid grow grid content-start gap-1 p-1 sm:gap-2 sm:p-2"
               style:grid-template-columns={`repeat(${Math.max(3, Math.min(6, Math.ceil(group.posts.length / 2)))}, minmax(0, 1fr))`}
             >
-             {#each group.posts as post (post.abslink)}
+              {#each group.posts as post (post.abslink)}
                 <ReviewCard
                   {...post}
                   layout={layout}
