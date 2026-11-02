@@ -148,7 +148,7 @@ body {
   
   .tag,
   .filter-chip {
-     @apply text-cream-50 bg-cream-700;
+     @apply text-cream-50 bg-cream-600/80;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
       background-image: none;
