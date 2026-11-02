@@ -136,17 +136,29 @@ body {
 }
 
 .tag-group {
-  @apply w-full;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .tag-group + .tag-group {
-  margin-top: 0.5rem;
+  margin-left: 0.25rem;
 }
 
 .tag-group--status {
-  margin-top: 1rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
 
+.tag-set {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
 
 .tag-list {
   /* @apply flex flex-wrap justify-center; */
