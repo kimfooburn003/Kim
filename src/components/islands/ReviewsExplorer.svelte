@@ -1029,16 +1029,6 @@
     <span>book</span>
   </button>
 
-  {#each availableYearTags as tag}
-    <button
-      type="button"
-      class={`filter-chip year-chip ${yearChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
-      onclick={() => clickYearTag(tag)}
-    >
-      <span>{tag}</span>
-    </button>
-  {/each}
-
   <button
     type="button"
     class={`filter-chip completion-chip ${completionChipState('completed')} hover:cursor-pointer text-base sm:text-sm`}
@@ -1055,6 +1045,16 @@
   >
     <span>ongoing</span>
   </button>
+
+  {#each availableYearTags as tag}
+    <button
+      type="button"
+      class={`filter-chip year-chip ${yearChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
+      onclick={() => clickYearTag(tag)}
+    >
+      <span>{tag}</span>
+    </button>
+  {/each}
 
   {#each availableSourceTags as tag}
     <button
