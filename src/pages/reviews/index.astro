@@ -25,9 +25,7 @@ const posts: Post[] = await Promise.all(
       weight: entry.data.weight,
       date: entry.data.date.toISOString(),
       tags: sortedTags,
-      links: Object.entries(entry.data.links ?? {})
-      .filter(([, link]) => typeof link === 'string' && link.trim().length > 0)
-      .map(([name, link]) => ({ name, link: String(link) })),
+      links: Object.entries(entry.data.links).map(([name, link]) => ({ name, link })),
       sentence: entry.data.sentence,
       description: entry.data.description,
       search_term: `${entry.data.auth} ${entry.data.name} ${entry.data.search_terms ?? ''}`.toLowerCase(),
