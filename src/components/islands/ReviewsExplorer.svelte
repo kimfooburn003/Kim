@@ -220,6 +220,7 @@
     return posts.map((post) => {
       const extras: string[] = [];
       for (const link of post.links) {
+        if (!link || !link.name) continue;
         const t = LINK_TAG_MAP[link.name];
         if (t) extras.push(t);
       }
