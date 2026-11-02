@@ -219,7 +219,7 @@
   const augmentedPosts = $derived.by(() => {
     return posts.map((post) => {
       const extras: string[] = [];
-      for (const link of post.links) {
+      for (const link of post.links ?? []) {
         if (!link || !link.name || !link.link) continue;
         const t = LINK_TAG_MAP[link.name];
         if (t) extras.push(t);
@@ -827,16 +827,6 @@
   function bookChipState(value: BookFilter): ChipState {
     return chipState(bookFilter === value, bookFilter !== 'all');
   }
-
-  // Keep the tier list visually centered and narrower when the list is short.
-  const tierListMaxWidth = $derived.by(() => {
-    const count = visiblePosts.length;
-    if (count <= 4) return '34rem';   // ~544px
-    if (count <= 8) return '46rem';   // ~736px
-    if (count <= 12) return '60rem';  // ~960px
-    if (count <= 18) return '72rem';  // ~1152px
-    return '84rem';                   // ~1344px
-  });
 </script>
 
 <div id="preamble">
@@ -1112,62 +1102,52 @@
 
 <div
   id="all-card-wrapper"
-  class={layout === 'tier' ? 'mt-8 flex w-full justify-center' : ''}
+  class={layout === 'tier' ? 'mt-8 flex flex-col gap-4' : ''}
 >
-  {#if layout === 'tier'}
-    <div
-      class="w-full px-2"
-      style:max-width={tierListMaxWidth}
-      style:margin-inline="auto"
-    >
-      {#each groupedPosts as group, gi (group.tier)}
-        {#if group.tier}
-          <section
-            class="tier-row flex rounded-md overflow-hidden bg-green-800/50"
-            aria-label={`Tier ${group.tier}`}
-          >
-            <div
-              class="tier-label flex-none w-16 sm:w-20 flex items-center justify-center text-center"
-              style:background={`linear-gradient(${TIER_LABEL_STYLES[group.tier].grad})`}
-              style:--tier-scrim={TIER_LABEL_STYLES[group.tier].scrim}
-            >
-              <div class="sticky top-4 bottom-4 flex flex-col items-center gap-1 px-2">
-                <span class="text-3xl sm:text-5xl font-bold text-green-50">{group.tier}</span>
-                <span class="sr-only sm:not-sr-only text-sm leading-tight text-green-100/80">
-                  {TIER_DESCRIPTIONS[group.tier]}
-                </span>
-              </div>
-            </div>
+  {#each groupedPosts as group, gi (group.tier)}
+    {#if layout === 'tier' && group.tier}
+      <section
+        class="tier-row flex rounded-md overflow-hidden bg-green-800/50"
+        aria-label={`Tier ${group.tier}`}
+      >
+        <div
+          class="tier-label flex-none w-16 sm:w-20 flex items-center justify-center text-center"
+          style:background={`linear-gradient(${TIER_LABEL_STYLES[group.tier].grad})`}
+          style:--tier-scrim={TIER_LABEL_STYLES[group.tier].scrim}
+        >
+          <div class="sticky top-4 bottom-4 flex flex-col items-center gap-1 px-2">
+            <span class="text-3xl sm:text-5xl font-bold text-green-50">{group.tier}</span>
+            <span class="sr-only sm:not-sr-only text-sm leading-tight text-green-100/80">
+              {TIER_DESCRIPTIONS[group.tier]}
+            </span>
+          </div>
+        </div>
 
-            <div
-              class="tier-grid grow grid content-start gap-1 p-1 sm:gap-2 sm:p-2"
-              style:grid-template-columns={`repeat(${Math.max(3, Math.min(6, Math.ceil(group.posts.length / 2)))}, minmax(0, 1fr))`}
-            >
-              {#each group.posts as post (post.abslink)}
-                <ReviewCard
-                  {...post}
-                  layout={layout}
-                  isBookmarked={readingList.has(slugFromAbslink(post.abslink))}
-                  onToggleBookmark={layout === 'tier' ? undefined : toggleBookmark}
-                />
-              {/each}
-            </div>
-          </section>
-        {/if}
-      {/each}
-    </div>
-  {:else}
-    {#each groupedPosts as group, gi (group.tier)}
+        <div
+          class="tier-grid grow grid content-start gap-1 p-1 sm:gap-2 sm:p-2"
+          style:grid-template-columns={`repeat(${Math.max(3, Math.min(6, Math.ceil(group.posts.length / 2)))}, minmax(0, 1fr))`}
+        >
+          {#each group.posts as post (post.abslink)}
+            <ReviewCard
+              {...post}
+              layout={layout}
+              isBookmarked={readingList.has(slugFromAbslink(post.abslink))}
+              onToggleBookmark={layout === 'tier' ? undefined : toggleBookmark}
+            />
+          {/each}
+        </div>
+      </section>
+    {:else}
       <div data-capture-root class="mx-auto mt-20 grid ...">
         {#each group.posts as post (post.abslink)}
           <ReviewCard
-           {...post}
+            {...post}
             layout={layout}
             isBookmarked={readingList.has(slugFromAbslink(post.abslink))}
             onToggleBookmark={toggleBookmark}
           />
         {/each}
       </div>
-    {/each}
-  {/if}
+    {/if}
+  {/each}
 </div>
