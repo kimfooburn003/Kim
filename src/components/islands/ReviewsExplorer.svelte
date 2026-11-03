@@ -424,10 +424,6 @@
   const selectedYear = $derived(
     Object.entries(yearActivations).find(([, active]) => active)?.[0] ?? ''
   );
-  let yearDropdownOpen = $state(false);
-  const selectedYear = $derived(
-    Object.entries(yearActivations).find(([, active]) => active)?.[0] ?? ''
-  );
   let searchTerm = $state(initial.searchTerm);
   let readingList = $state<SvelteSet<string>>(initial.readingList);
   let showReadingList = $state(initial.showReadingList);
