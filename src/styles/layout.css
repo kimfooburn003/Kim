@@ -253,7 +253,7 @@ body {
     }
   }
 
-year-filter-group {
+.year-filter-group {
   @apply inline-flex items-center m-2;
 }
 
