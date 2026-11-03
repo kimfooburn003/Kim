@@ -247,9 +247,17 @@ body {
   }
 
   .source-filter-group {
-    @apply inline-flex flex-wrap items-center justify-center m-2;
+    @apply inline-flex items-center m-2 overflow-hidden rounded-lg;
     .source-chip {
-      @apply m-2 rounded-full px-4 py-2 text-lg sm:text-base cursor-pointer;
+      @apply m-0 rounded-none px-4 py-2 text-lg sm:text-base cursor-pointer;
+
+      &:first-child {
+        @apply rounded-l-md;
+      }
+
+      &:last-child {
+        @apply rounded-r-md;
+      }
     }
   }
   
