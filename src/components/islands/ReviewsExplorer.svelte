@@ -991,6 +991,31 @@
   </div>
 </div>
 
+<div class="inline-flex items-center m-2 overflow-hidden rounded-md">
+    <button
+      type="button"
+      class={`px-4 py-2 rounded-l-md text-lg sm:text-base cursor-pointer ${
+        bookFilter === 'series'
+          ? 'bg-green-500 text-green-50'
+          : 'bg-green-700 text-green-400 hover:bg-green-500 hover:text-green-50'
+      }`}
+      onclick={() => (bookFilter = bookFilter === 'series' ? 'all' : 'series')}
+    >
+      Series
+    </button>
+    <button
+      type="button"
+      class={`px-4 py-2 rounded-r-md text-lg sm:text-base cursor-pointer ${
+        bookFilter === 'book'
+          ? 'bg-green-500 text-green-50'
+          : 'bg-green-700 text-green-400 hover:bg-green-500 hover:text-green-50'
+      }`}
+      onclick={() => (bookFilter = bookFilter === 'book' ? 'all' : 'book')}
+    >
+      Book
+    </button>
+  </div>
+
 <div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
   <button
     type="button"
