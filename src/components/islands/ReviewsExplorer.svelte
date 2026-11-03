@@ -424,6 +424,10 @@
   const selectedYear = $derived(
     Object.entries(yearActivations).find(([, active]) => active)?.[0] ?? ''
   );
+  let yearDropdownOpen = $state(false);
+  const selectedYear = $derived(
+    Object.entries(yearActivations).find(([, active]) => active)?.[0] ?? ''
+  );
   let searchTerm = $state(initial.searchTerm);
   let readingList = $state<SvelteSet<string>>(initial.readingList);
   let showReadingList = $state(initial.showReadingList);
@@ -940,23 +944,46 @@
       </button>
     </div>
 
-    <label for="year-filter" class="inline-flex items-center gap-2 m-2">
-      <span class="sr-only">Filter by year</span>
-      <select
+   <div class="year-dropdown">
+      <button
         id="year-filter"
-        class="bg-green-700 rounded-md px-3 py-2 text-green-100 outline-none focus:ring-2 focus:ring-green-400"
-        value={Object.entries(yearActivations).find(([, active]) => active)?.[0] ?? ''}
-        onchange={(e) => {
-          const year = (e.currentTarget as HTMLSelectElement).value;
-          yearActivations = year ? { [year]: true } : {};
-        }}
+        type="button"
+        class="year-dropdown-trigger"
+        aria-haspopup="listbox"
+        aria-expanded={yearDropdownOpen}
+        onclick={() => (yearDropdownOpen = !yearDropdownOpen)}
       >
-        <option value="">All years</option>
-        {#each availableYearTags as year}
-          <option value={year}>{year}</option>
-        {/each}
-      </select>
-    </label>
+        {selectedYear || 'All years'}
+      </button>
+      {#if yearDropdownOpen}
+        <div class="year-dropdown-options" role="listbox" aria-labelledby="year-filter">
+          <button
+            type="button"
+            role="option"
+            aria-selected={!selectedYear}
+            onclick={() => {
+              yearActivations = {};
+              yearDropdownOpen = false;
+            }}
+          >
+            All years
+          </button>
+          {#each availableYearTags as year}
+            <button
+              type="button"
+              role="option"
+              aria-selected={selectedYear === year}
+              onclick={() => {
+                yearActivations = { [year]: true };
+                yearDropdownOpen = false;
+              }}
+            >
+              {year}
+            </button>
+          {/each}
+        </div>
+      {/if}
+    </div>
 
     <input
       oninput={(e) => (searchTerm = (e.currentTarget as HTMLInputElement).value)}
