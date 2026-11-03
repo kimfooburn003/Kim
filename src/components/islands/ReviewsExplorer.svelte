@@ -311,7 +311,9 @@
       readingList: new SvelteSet<string>(),
       showReadingList: false,
       completionFilter: 'all' as CompletionFilter,
-      sourceActivations: {} as Record<SourceTag, boolean>,
+      sourceActivations: Object.fromEntries(
+        SOURCE_TAGS.map((tag) => [tag, true])
+      ) as Record<SourceTag, boolean>,
       bookFilter: 'series' as BookFilter,
     };
     if (typeof window === 'undefined') return out;
