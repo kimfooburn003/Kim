@@ -948,10 +948,6 @@
         type="button"
         class={`year-dropdown-trigger inline-flex items-center gap-2 ${selectedYear ? 'is-active' : ''}`}
          aria-haspopup="listbox"
-         aria-expanded={yearDropdownOpen}
-         onclick={() => (yearDropdownOpen = !yearDropdownOpen)}
-       >
-        aria-haspopup="listbox"
         aria-expanded={yearDropdownOpen}
         onclick={() => (yearDropdownOpen = !yearDropdownOpen)}
       >
