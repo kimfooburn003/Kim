@@ -316,6 +316,7 @@
     };
     if (typeof window === 'undefined') return out;
     const params = new URLSearchParams(window.location.search);
+    if (params.has('source')) out.sourceActivations = {};
     if (params.has('o')) out.byRank = params.get('o') === '1';
     if (params.has('l')) out.layout = params.get('l') as Layout;
     if (params.has('status')) {
@@ -643,9 +644,18 @@
         if (bookFilter === 'series' && !post.tags.includes('series')) {
           return false;
         }
+        const includedSources = Object.entries(sourceActivations)
+          .filter(([, active]) => active === true)
+          .map(([tag]) => tag);
+
         for (const [tag, active] of Object.entries(sourceActivations)) {
-          if (active === true && !post.tags.includes(tag)) return false;
           if (active === false && post.tags.includes(tag)) return false;
+        }
+        if (
+          includedSources.length > 0 &&
+          !includedSources.some((tag) => post.tags.includes(tag))
+        ) {
+          return false;
         }
 
         for (const [tag, active] of Object.entries(formatActivations)) {
