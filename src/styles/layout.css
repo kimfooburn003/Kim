@@ -249,7 +249,7 @@ body {
   .source-filter-group {
     @apply inline-flex items-center m-2 overflow-hidden rounded-md;
     .source-chip {
-      @apply m-0 rounded-none px-4 py-2 text-lg sm:text-base cursor-pointer;
+      @apply m-0 rounded-none px-4 py-2 text-lg sm:text-base font-normal cursor-pointer;
 
       &:first-child {
         @apply rounded-l-full;
