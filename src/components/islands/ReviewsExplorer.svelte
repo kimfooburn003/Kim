@@ -986,15 +986,31 @@
      </div>
     </div>
 
-    <input
-      oninput={(e) => (searchTerm = (e.currentTarget as HTMLInputElement).value)}
-      type="text"
-      id="search-input"
-      name="search"
-      bind:value={searchTerm}
-      class="bg-green-700 rounded-md text-green-400 m-2 focus:text-green-100 outline-none focus:ring-2 focus:ring-green-400"
-      placeholder="Search..."
-    />
+    <div class="m-2 inline-flex items-center gap-2 rounded-md bg-green-700 px-3 text-green-400 focus-within:ring-2 focus-within:ring-green-400">
+      <svg
+        class="h-5 w-5 shrink-0"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-4-4" />
+      </svg>
+      <input
+        oninput={(e) => (searchTerm = (e.currentTarget as HTMLInputElement).value)}
+        type="text"
+        id="search-input"
+        name="search"
+        bind:value={searchTerm}
+        class="w-48 bg-transparent py-2 text-green-400 outline-none focus:text-green-100 sm:w-56"
+        placeholder="Search..."
+      />
+    </div>
     {#if readingList.size > 0}
       <div class="inline-flex items-center m-2 overflow-hidden rounded-md">
         <button
