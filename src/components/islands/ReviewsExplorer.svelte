@@ -1123,7 +1123,7 @@
 			{#each availableFormatTags as tag}
       <button
         type="button"
-        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
+        lass={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
         onclick={() => clickFormatTag(tag)}
       >
         <span>{FORMAT_LABELS[tag]}</span>
