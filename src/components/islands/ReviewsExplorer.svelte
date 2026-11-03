@@ -91,8 +91,6 @@
     ).sort((a, b) => Number(b) - Number(a))
   );
 
-  const currentYear = String(new Date().getFullYear());
-
   type FormatTag =
     | 'fanfic'
     | 'webnovel'
@@ -367,13 +365,7 @@
         .split('_')
         .find((tag) => availableYearTags.includes(tag));
       if (year) out.yearActivations[year] = true;
-    }
-    if (
-      Object.keys(out.yearActivations).length === 0 &&
-      availableYearTags.includes(currentYear)
-    ) {
-      out.yearActivations[currentYear] = true;
-    }
+    }    
     if (params.has('book')) {
       const book = params.get('book');
       if (book === 'book' || book === 'series') {
@@ -586,9 +578,7 @@
     tagActivations = {};
     protagonistActivations = {};
     progressionActivations = {};
-    yearActivations = availableYearTags.includes(currentYear)
-      ? { [currentYear]: true }
-      : {};
+    yearActivations = {};
     searchTerm = '';
     layout = defaultLayout;
     byRank = true;
@@ -940,16 +930,32 @@
       </button>
     </div>
 
-   <div class="year-dropdown">
+   <div class="year-filter-group">
+      <button
+        type="button"
+        class={`year-filter-all ${selectedYear ? '' : 'is-active'}`}
+        aria-pressed={!selectedYear}
+        onclick={() => {
+          yearActivations = {};
+          yearDropdownOpen = false;
+        }}
+      >
+        All
+      </button>
+      <div class="year-dropdown">
       <button
         id="year-filter"
         type="button"
-        class="year-dropdown-trigger inline-flex items-center gap-2"
+        class={`year-dropdown-trigger inline-flex items-center gap-2 ${selectedYear ? 'is-active' : ''}`}
+         aria-haspopup="listbox"
+         aria-expanded={yearDropdownOpen}
+         onclick={() => (yearDropdownOpen = !yearDropdownOpen)}
+       >
         aria-haspopup="listbox"
         aria-expanded={yearDropdownOpen}
         onclick={() => (yearDropdownOpen = !yearDropdownOpen)}
       >
-        {selectedYear || 'All years'}
+        {selectedYear || 'Years'}
         <svg
           class="h-4 w-4"
           xmlns="http://www.w3.org/2000/svg"
@@ -965,18 +971,7 @@
         </svg>
       </button>
       {#if yearDropdownOpen}
-        <div class="year-dropdown-options" role="listbox" aria-labelledby="year-filter">
-          <button
-            type="button"
-            role="option"
-            aria-selected={!selectedYear}
-            onclick={() => {
-              yearActivations = {};
-              yearDropdownOpen = false;
-            }}
-          >
-            All years
-          </button>
+        <div class="year-dropdown-options" role="listbox" aria-labelledby="year-filter">          
           {#each availableYearTags as year}
             <button
               type="button"
@@ -992,6 +987,7 @@
           {/each}
         </div>
       {/if}
+     </div>
     </div>
 
     <input
