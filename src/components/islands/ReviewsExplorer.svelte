@@ -585,7 +585,9 @@
     showReadingList = false;
     completionFilter = 'all';
     formatActivations = {};
-    sourceActivations = {}; 
+    sourceActivations = Object.fromEntries(
+      availableSourceTags.map((tag) => [tag, true])
+    ) as Record<SourceTag, boolean>;
     bookFilter = 'series';
   }
 
