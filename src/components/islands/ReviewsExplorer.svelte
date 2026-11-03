@@ -1054,23 +1054,6 @@
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
-  <button
-    type="button"
-    class={`filter-chip completion-chip ${completionChipState('completed')} hover:cursor-pointer text-base sm:text-sm`}
-    onclick={() =>
-      (completionFilter = completionFilter === 'completed' ? 'all' : 'completed')}
-  >
-    <span>completed</span>
-  </button>
-  <button
-    type="button"
-    class={`filter-chip completion-chip ${completionChipState('ongoing')} hover:cursor-pointer text-base sm:text-sm`}
-    onclick={() =>
-      (completionFilter = completionFilter === 'ongoing' ? 'all' : 'ongoing')}
-  >
-    <span>ongoing</span>
-  </button>
-
   {#each availableYearTags as tag}
     <button
       type="button"
