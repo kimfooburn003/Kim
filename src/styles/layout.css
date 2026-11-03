@@ -249,14 +249,14 @@ body {
   .source-filter-group {
     @apply inline-flex items-center m-2 overflow-hidden rounded-md;
     .source-chip {
-      @apply m-0 rounded-lg px-4 py-2 text-lg sm:text-base cursor-pointer;
+      @apply m-0 rounded-md px-4 py-2 text-lg sm:text-base cursor-pointer;
 
       &:first-child {
-        @apply rounded-l-xl;
+        @apply rounded-l-full;
       }
 
       &:last-child {
-        @apply rounded-r-xl;
+        @apply rounded-r-full;
       }
     }
   }
