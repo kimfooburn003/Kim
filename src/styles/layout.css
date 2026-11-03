@@ -134,32 +134,6 @@ body {
     @apply text-xl text-green-300;
   }
 }
-
-.tag-group {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.tag-group + .tag-group {
-  margin-left: 0.25rem;
-}
-
-.tag-group--status {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-}
-
-.tag-set {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25rem;
-}
-
 .tag-list {
   /* @apply flex flex-wrap justify-center; */
   @apply flex flex-wrap justify-center gap-x-1 gap-y-1;
