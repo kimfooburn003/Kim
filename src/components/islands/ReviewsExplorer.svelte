@@ -362,9 +362,11 @@
       }
     }
     if (params.has('year')) {
-      for (const t of params.get('year')!.split('_').filter(Boolean)) {
-        out.yearActivations[t] = true;
-      }
+      const year = params
+        .get('year')!
+        .split('_')
+        .find((tag) => availableYearTags.includes(tag));
+      if (year) out.yearActivations[year] = true;
     }
     if (
       Object.keys(out.yearActivations).length === 0 &&
@@ -545,20 +547,6 @@
       }
     } else {
       progressionActivations = { ...progressionActivations, [tag]: true };
-    }
-  }
-
-  function clickYearTag(tag: string) {
-    if (tag in yearActivations) {
-      if (yearActivations[tag] === true) {
-        yearActivations = { ...yearActivations, [tag]: false };
-      } else {
-        const next = { ...yearActivations };
-        delete next[tag];
-        yearActivations = next;
-      }
-    } else {
-      yearActivations = { ...yearActivations, [tag]: true };
     }
   }
 
@@ -948,6 +936,24 @@
       </button>
     </div>
 
+    <label for="year-filter" class="inline-flex items-center gap-2 m-2">
+      <span class="sr-only">Filter by year</span>
+      <select
+        id="year-filter"
+        class="bg-green-700 rounded-md px-3 py-2 text-green-100 outline-none focus:ring-2 focus:ring-green-400"
+        value={Object.entries(yearActivations).find(([, active]) => active)?.[0] ?? ''}
+        onchange={(e) => {
+          const year = (e.currentTarget as HTMLSelectElement).value;
+          yearActivations = year ? { [year]: true } : {};
+        }}
+      >
+        <option value="">All years</option>
+        {#each availableYearTags as year}
+          <option value={year}>{year}</option>
+        {/each}
+      </select>
+    </label>
+
     <input
       oninput={(e) => (searchTerm = (e.currentTarget as HTMLInputElement).value)}
       type="text"
@@ -1054,16 +1060,6 @@
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
-  {#each availableYearTags as tag}
-    <button
-      type="button"
-      class={`filter-chip year-chip ${yearChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
-      onclick={() => clickYearTag(tag)}
-    >
-      <span>{tag}</span>
-    </button>
-  {/each}
-
   {#each availableSourceTags as tag}
     <button
       type="button"
