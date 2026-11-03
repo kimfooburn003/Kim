@@ -252,6 +252,7 @@ body {
       }
     }
   }
+}
 
 .year-filter-group {
   @apply inline-flex items-center m-2;
