@@ -1092,15 +1092,17 @@
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
-  {#each availableSourceTags as tag}
-    <button
-      type="button"
-      class={`filter-chip source-chip ${sourceChipState(tag)} hover:cursor-pointer text-base sm:text-sm`}
-      onclick={() => clickSourceTag(tag)}
-    >
-      <span>{SOURCE_LABELS[tag]}</span>
-    </button>
-  {/each}  
+  <div class="source-filter-group" role="group" aria-label="Filter by source">
+    {#each availableSourceTags as tag}
+      <button
+        type="button"
+        class={`filter-chip source-chip ${sourceChipState(tag)}`}
+        onclick={() => clickSourceTag(tag)}
+      >
+        <span>{SOURCE_LABELS[tag]}</span>
+      </button>
+    {/each}
+  </div>
 
   {#each availableFormatTags as tag}
     <button
