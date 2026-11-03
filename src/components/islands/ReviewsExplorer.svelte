@@ -944,12 +944,25 @@
       <button
         id="year-filter"
         type="button"
-        class="year-dropdown-trigger"
+        class="year-dropdown-trigger inline-flex items-center gap-2"
         aria-haspopup="listbox"
         aria-expanded={yearDropdownOpen}
         onclick={() => (yearDropdownOpen = !yearDropdownOpen)}
       >
         {selectedYear || 'All years'}
+        <svg
+          class="h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </button>
       {#if yearDropdownOpen}
         <div class="year-dropdown-options" role="listbox" aria-labelledby="year-filter">
