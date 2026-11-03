@@ -1119,16 +1119,18 @@
   </div>
 </div>
 
-<div class="format-filter-group" role="group" aria-label="Filter by format">
+<div class="tag-list max-w-7xl mx-auto">
+  <div class="format-filter-group" role="group" aria-label="Filter by format">
     {#each availableFormatTags as tag}
       <button
         type="button"
-        class={`filter-chip format-chip ${formatChipState(tag)} text-lg sm:text-base`}
+        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
         onclick={() => clickFormatTag(tag)}
       >
         <span>{FORMAT_LABELS[tag]}</span>
       </button>
     {/each}
+  </div>
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mt-5 ">
