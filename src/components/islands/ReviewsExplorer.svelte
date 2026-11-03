@@ -1120,10 +1120,10 @@
 </div>
 
 <div class="format-filter-group" role="group" aria-label="Filter by format">
-			{#each availableFormatTags as tag}
+    {#each availableFormatTags as tag}
       <button
         type="button"
-        lass={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
+        class={`filter-chip format-chip ${formatChipState(tag)} text-lg sm:text-base`}
         onclick={() => clickFormatTag(tag)}
       >
         <span>{FORMAT_LABELS[tag]}</span>
