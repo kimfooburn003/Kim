@@ -188,22 +188,10 @@ body {
 
   .source-chip,
   .completion-chip,
-  .book-chip,
   .format-chip,
   .year-chip {
     @apply py-[5px] px-3 ;
-  }
-  
-  .book-chip {
-    @apply border-2 border-accent-400/80 bg-transparent;  
-    &.active-true {
-      @apply text-accent-50 bg-accent-700 border-accent-400;
-    }  
-    &.active-false,
-    &.active-undefined {
-      @apply text-accent-100 border-accent-400/70 bg-accent-800/70;
-    }
-  }
+  }  
 
   .year-chip {
     @apply border-2 text-cream-50 border-cream-400/80 bg-cream-800/80; 
