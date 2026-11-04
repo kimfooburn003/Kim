@@ -224,9 +224,10 @@ body {
   }
 
   .source-filter-group,
-  .format-filter-group{
+  .format-filter-group {
     @apply inline-flex items-center m-2 overflow-hidden rounded-md;
-    .source-chip {
+    .source-chip,
+    .format-chip {
       @apply m-0 rounded-none text-lg sm:text-base font-normal cursor-pointer;
       &:first-child {
         @apply rounded-l-md;
