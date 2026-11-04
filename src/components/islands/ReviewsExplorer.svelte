@@ -1079,7 +1079,7 @@
 
   <button
       type="button"
-      class="inline-flex items-center gap-2 m-2 px-4 py-2 h-[38px] sm:h-[38px] rounded-none bg-green-700 hover:bg-green-500 disabled:hover:bg-green-700 rounded-md cursor-pointer disabled:cursor-default text-green-50 disabled:opacity-50"
+      class="inline-flex items-center gap-2 m-2 px-4 py-2 rounded-md text-lg sm:text-base bg-green-700 hover:bg-green-500 disabled:hover:bg-green-700 cursor-pointer disabled:cursor-default text-green-50 disabled:opacity-50"
       onclick={screenshot}
       disabled={capturing || visiblePosts.length === 0}
       title="Screenshot"
@@ -1125,7 +1125,7 @@
     </button>    
     <button
       type="button"
-      class="inline-flex items-center m-2 px-4 py-2 bg-accent-500/70 rounded-none hover:bg-accent-500 cursor-pointer text-cream-200 text-lg sm:text-base"
+      class="inline-flex items-center m-2 px-4 py-2 rounded-md bg-accent-500/70 hover:bg-accent-500 cursor-pointer text-cream-200 text-lg sm:text-base"
       onclick={reset}
     >
       Reset
