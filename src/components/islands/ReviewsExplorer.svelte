@@ -1117,9 +1117,7 @@
       </button>
     {/each}
   </div>
-</div>
 
-<div class="tag-list max-w-7xl mx-auto">
   <div class="format-filter-group" role="group" aria-label="Filter by format">
     {#each availableFormatTags as tag}
       <button
