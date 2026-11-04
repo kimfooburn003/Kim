@@ -311,6 +311,9 @@
       readingList: new SvelteSet<string>(),
       showReadingList: false,
       completionFilter: 'all' as CompletionFilter,
+						formatActivations: Object.fromEntries(
+        availableFormatTags.map((tag) => [tag, true])
+      ) as Record<FormatTag, boolean>,     
       sourceActivations: Object.fromEntries(
         SOURCE_TAGS.map((tag) => [tag, true])
       ) as Record<SourceTag, boolean>,
@@ -342,6 +345,7 @@
       }
     }
     if (params.has('format')) {
+			out.formatActivations = {};
       for (const t of params.get('format')!.split('_').filter(Boolean)) {        
         if (FORMAT_TAGS.includes(t as FormatTag)) {
           out.formatActivations[t as FormatTag] = true;
