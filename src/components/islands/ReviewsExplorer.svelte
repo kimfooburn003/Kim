@@ -1006,15 +1006,6 @@
      </div>
     </div>
 
-   <input
-      oninput={(e) => (searchTerm = (e.currentTarget as HTMLInputElement).value)}
-      type="text"
-      id="search-input"
-      name="search"
-      bind:value={searchTerm}
-      class="bg-green-700 rounded-md text-green-400 m-2 focus:text-green-100 outline-none focus:ring-2 focus:ring-green-400"
-      placeholder="Search..."
-    />
     {#if readingList.size > 0}
       <div class="inline-flex items-center m-2 overflow-hidden rounded-md">
         <button
@@ -1055,7 +1046,42 @@
         </button>
       </div>
     {/if}
+  </div>
+</div>
 
+<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
+  <div class="source-filter-group" role="group" aria-label="Filter by source">
+    {#each availableSourceTags as tag}
+      <button
+        type="button"
+        class={`filter-chip source-chip ${sourceChipState(tag)}`}
+        onclick={() => clickSourceTag(tag)}
+      >
+        <span>{SOURCE_LABELS[tag]}</span>
+      </button>
+    {/each}
+  </div>
+
+  <div class="format-filter-group" role="group" aria-label="Filter by format">
+    {#each availableFormatTags as tag}
+      <button
+        type="button"
+        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
+        onclick={() => clickFormatTag(tag)}
+      >
+        <span>{FORMAT_LABELS[tag]}</span>
+      </button>
+    {/each}
+
+	<input
+      oninput={(e) => (searchTerm = (e.currentTarget as HTMLInputElement).value)}
+      type="text"
+      id="search-input"
+      name="search"
+      bind:value={searchTerm}
+      class="bg-green-700 rounded-md text-green-400 m-2 focus:text-green-100 outline-none focus:ring-2 focus:ring-green-400"
+      placeholder="Search..."
+    />
     <button
       type="button"
       class="inline-flex items-center gap-2 m-2 px-4 py-2 h-[38px] sm:h-[38px] bg-green-700 hover:bg-green-500 disabled:hover:bg-green-700 rounded-md cursor-pointer disabled:cursor-default text-green-50 disabled:opacity-50"
@@ -1109,32 +1135,6 @@
     >
       Reset
     </button>
-  </div>
-</div>
-
-<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
-  <div class="source-filter-group" role="group" aria-label="Filter by source">
-    {#each availableSourceTags as tag}
-      <button
-        type="button"
-        class={`filter-chip source-chip ${sourceChipState(tag)}`}
-        onclick={() => clickSourceTag(tag)}
-      >
-        <span>{SOURCE_LABELS[tag]}</span>
-      </button>
-    {/each}
-  </div>
-
-  <div class="format-filter-group" role="group" aria-label="Filter by format">
-    {#each availableFormatTags as tag}
-      <button
-        type="button"
-        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
-        onclick={() => clickFormatTag(tag)}
-      >
-        <span>{FORMAT_LABELS[tag]}</span>
-      </button>
-    {/each}
   </div>
 </div>
 
