@@ -1049,37 +1049,7 @@
         </button>
       </div>
     {/if}
-  </div>
-</div>
 
-<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
-  <div class="source-filter-group" role="group" aria-label="Filter by source">
-    {#each availableSourceTags as tag}
-      <button
-        type="button"
-        class={`filter-chip source-chip ${sourceChipState(tag)}`}
-        onclick={() => clickSourceTag(tag)}
-      >
-        <span>{SOURCE_LABELS[tag]}</span>
-      </button>
-    {/each}
-  </div>
-
-  <div class="format-filter-group" role="group" aria-label="Filter by format">
-    {#each availableFormatTags as tag}
-      <button
-        type="button"
-        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
-        onclick={() => clickFormatTag(tag)}
-      >
-        <span>{FORMAT_LABELS[tag]}</span>
-      </button>
-    {/each}
-  </div>
-</div>
-
-<div id="toggle-input" class="max-w-7xl mx-auto">
-  <div class="justify-center flex flex-wrap items-center">
     <button
       type="button"
       class="inline-flex items-center gap-2 m-2 px-4 py-2 rounded-md text-lg sm:text-base bg-green-700 hover:bg-green-500 disabled:hover:bg-green-700 cursor-pointer disabled:cursor-default text-green-50 disabled:opacity-50"
@@ -1133,6 +1103,32 @@
     >
       Reset
     </button>
+  </div>
+</div>
+
+<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
+  <div class="source-filter-group" role="group" aria-label="Filter by source">
+    {#each availableSourceTags as tag}
+      <button
+        type="button"
+        class={`filter-chip source-chip ${sourceChipState(tag)}`}
+        onclick={() => clickSourceTag(tag)}
+      >
+        <span>{SOURCE_LABELS[tag]}</span>
+      </button>
+    {/each}
+  </div>
+
+  <div class="format-filter-group" role="group" aria-label="Filter by format">
+    {#each availableFormatTags as tag}
+      <button
+        type="button"
+        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
+        onclick={() => clickFormatTag(tag)}
+      >
+        <span>{FORMAT_LABELS[tag]}</span>
+      </button>
+    {/each}
   </div>
 </div>
 
