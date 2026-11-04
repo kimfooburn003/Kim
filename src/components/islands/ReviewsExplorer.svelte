@@ -1049,7 +1049,35 @@
         </button>
       </div>
     {/if}
-    <button
+  </div>
+</div>
+
+<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
+  <div class="source-filter-group" role="group" aria-label="Filter by source">
+    {#each availableSourceTags as tag}
+      <button
+        type="button"
+        class={`filter-chip source-chip ${sourceChipState(tag)}`}
+        onclick={() => clickSourceTag(tag)}
+      >
+        <span>{SOURCE_LABELS[tag]}</span>
+      </button>
+    {/each}
+  </div>
+
+  <div class="format-filter-group" role="group" aria-label="Filter by format">
+    {#each availableFormatTags as tag}
+      <button
+        type="button"
+        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
+        onclick={() => clickFormatTag(tag)}
+      >
+        <span>{FORMAT_LABELS[tag]}</span>
+      </button>
+    {/each}
+  </div>
+
+  <button
       type="button"
       class="inline-flex items-center gap-2 m-2 px-4 py-2 h-[38px] sm:h-[38px] bg-green-700 hover:bg-green-500 disabled:hover:bg-green-700 rounded-md cursor-pointer disabled:cursor-default text-green-50 disabled:opacity-50"
       onclick={screenshot}
@@ -1102,33 +1130,6 @@
     >
       Reset
     </button>
-  </div>
-</div>
-
-<div id="tags" class="tag-list max-w-7xl mx-auto mb-5">  
-  <div class="source-filter-group" role="group" aria-label="Filter by source">
-    {#each availableSourceTags as tag}
-      <button
-        type="button"
-        class={`filter-chip source-chip ${sourceChipState(tag)}`}
-        onclick={() => clickSourceTag(tag)}
-      >
-        <span>{SOURCE_LABELS[tag]}</span>
-      </button>
-    {/each}
-  </div>
-
-  <div class="format-filter-group" role="group" aria-label="Filter by format">
-    {#each availableFormatTags as tag}
-      <button
-        type="button"
-        class={`filter-chip format-chip ${formatChipState(tag)} hover:cursor-pointer`}
-        onclick={() => clickFormatTag(tag)}
-      >
-        <span>{FORMAT_LABELS[tag]}</span>
-      </button>
-    {/each}
-  </div>
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mt-5 ">
