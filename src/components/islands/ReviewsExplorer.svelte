@@ -71,7 +71,9 @@
     const relevantPosts = augmentedPosts.filter(
       (post) =>
         (bookFilter === 'all' || post.tags.includes(bookFilter)) &&
-        (completionFilter === 'all' || post.tags.includes(completionFilter))
+        (completionFilter === 'all' || post.tags.includes(completionFilter)) &&
+        (!selectedYear ||
+          String(new Date(post.date).getFullYear()) === selectedYear)
     );
 
     return Array.from(
@@ -156,7 +158,9 @@
     const relevantPosts = augmentedPosts.filter(
       (post) =>
         (bookFilter === 'all' || post.tags.includes(bookFilter)) &&
-        (completionFilter === 'all' || post.tags.includes(completionFilter))
+        (completionFilter === 'all' || post.tags.includes(completionFilter)) &&
+        (!selectedYear ||
+          String(new Date(post.date).getFullYear()) === selectedYear)
     );
 
     return Array.from(
