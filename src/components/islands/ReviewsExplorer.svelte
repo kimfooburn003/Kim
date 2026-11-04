@@ -697,11 +697,24 @@
         ) {
           return false;
         }
+        
+		const includedFormats = Object.entries(formatActivations)
+          .filter(
+            ([tag, active]) =>
+              active === true && availableFormatTags.includes(tag as FormatTag)
+          )
+          .map(([tag]) => tag);
 
         for (const [tag, active] of Object.entries(formatActivations)) {
-					if (!availableFormatTags.includes(tag as FormatTag)) continue;
-          if (active === true && !post.tags.includes(tag)) return false;
+          if (!availableFormatTags.includes(tag as FormatTag)) continue;
           if (active === false && post.tags.includes(tag)) return false;
+        }
+
+        if (
+          includedFormats.length > 0 &&
+          !includedFormats.some((tag) => post.tags.includes(tag))
+        ) {
+          return false;
         }
         for (const [tag, active] of Object.entries(tagActivations)) {
           if (active === true && !post.tags.includes(tag)) return false;
