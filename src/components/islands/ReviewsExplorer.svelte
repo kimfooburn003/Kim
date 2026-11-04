@@ -591,7 +591,9 @@
     byRank = true;
     showReadingList = false;
     completionFilter = 'all';
-    formatActivations = {};
+    formatActivations = Object.fromEntries(
+      availableFormatTags.map((tag) => [tag, true])
+    ) as Record<FormatTag, boolean>;
     sourceActivations = Object.fromEntries(
       availableSourceTags.map((tag) => [tag, true])
     ) as Record<SourceTag, boolean>;
