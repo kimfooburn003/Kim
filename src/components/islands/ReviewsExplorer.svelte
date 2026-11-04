@@ -1076,8 +1076,11 @@
       </button>
     {/each}
   </div>
+</div>
 
-  <button
+<div id="toggle-input" class="max-w-7xl mx-auto">
+  <div class="justify-center flex flex-wrap items-center">
+    <button
       type="button"
       class="inline-flex items-center gap-2 m-2 px-4 py-2 rounded-md text-lg sm:text-base bg-green-700 hover:bg-green-500 disabled:hover:bg-green-700 cursor-pointer disabled:cursor-default text-green-50 disabled:opacity-50"
       onclick={screenshot}
@@ -1130,6 +1133,7 @@
     >
       Reset
     </button>
+  </div>
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mt-5 ">
