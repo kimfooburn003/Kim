@@ -69,7 +69,9 @@
 
   const availableSourceTags = $derived.by(() => {
     const relevantPosts = augmentedPosts.filter(
-      (post) => bookFilter === 'all' || post.tags.includes(bookFilter)
+      (post) =>
+        (bookFilter === 'all' || post.tags.includes(bookFilter)) &&
+        (completionFilter === 'all' || post.tags.includes(completionFilter))
     );
 
     return Array.from(
@@ -152,7 +154,9 @@
 
 	const availableFormatTags = $derived.by(() => {
     const relevantPosts = augmentedPosts.filter(
-      (post) => bookFilter === 'all' || post.tags.includes(bookFilter)
+      (post) =>
+        (bookFilter === 'all' || post.tags.includes(bookFilter)) &&
+        (completionFilter === 'all' || post.tags.includes(completionFilter))
     );
 
     return Array.from(
