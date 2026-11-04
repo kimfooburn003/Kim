@@ -1072,8 +1072,10 @@
         <span>{FORMAT_LABELS[tag]}</span>
       </button>
     {/each}
+  </div>
 
-	<input
+	<div class="justify-center flex flex-wrap items-center">
+		<input
       oninput={(e) => (searchTerm = (e.currentTarget as HTMLInputElement).value)}
       type="text"
       id="search-input"
@@ -1082,6 +1084,7 @@
       class="bg-green-700 rounded-md text-green-400 m-2 focus:text-green-100 outline-none focus:ring-2 focus:ring-green-400"
       placeholder="Search..."
     />
+
     <button
       type="button"
       class="inline-flex items-center gap-2 m-2 px-4 py-2 h-[38px] sm:h-[38px] bg-green-700 hover:bg-green-500 disabled:hover:bg-green-700 rounded-md cursor-pointer disabled:cursor-default text-green-50 disabled:opacity-50"
@@ -1127,7 +1130,8 @@
           <circle cx="12" cy="13" r="4" />
         </svg>
       {/if}
-    </button>    
+    </button> 
+
     <button
       type="button"
       class="inline-flex items-center m-2 px-4 py-2 bg-accent-500/70 hover:bg-accent-500 rounded-md cursor-pointer text-cream-200 text-lg sm:text-base"
@@ -1135,7 +1139,7 @@
     >
       Reset
     </button>
-  </div>
+	</div>
 </div>
 
 <div id="tags" class="tag-list max-w-7xl mx-auto mt-5 ">
