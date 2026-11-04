@@ -57,7 +57,7 @@
     'relationship-building': 'relationship building',
   };
 
-  const availableSourceTags = $derived(
+  const allAvailableSourceTags = $derived(
     Array.from(
       new Set(
         augmentedPosts
@@ -66,6 +66,20 @@
       )
     ).sort()
   );
+
+  const availableSourceTags = $derived.by(() => {
+    const relevantPosts = augmentedPosts.filter(
+      (post) => bookFilter === 'all' || post.tags.includes(bookFilter)
+    );
+
+    return Array.from(
+      new Set(
+        relevantPosts
+          .flatMap((post) => post.tags)
+          .filter((tag): tag is SourceTag => SOURCE_TAGS.includes(tag as SourceTag))
+      )
+    ).sort();
+  });
 
   const availableProgressionTags = $derived(
     Array.from(
@@ -609,7 +623,7 @@
       availableFormatTags.map((tag) => [tag, true])
     ) as Record<FormatTag, boolean>;
     sourceActivations = Object.fromEntries(
-      availableSourceTags.map((tag) => [tag, true])
+      allAvailableSourceTags.map((tag) => [tag, true])
     ) as Record<SourceTag, boolean>;
     bookFilter = 'series';
   }
@@ -667,10 +681,14 @@
           return false;
         }
         const includedSources = Object.entries(sourceActivations)
-          .filter(([, active]) => active === true)
+          .filter(
+            ([tag, active]) =>
+              active === true && availableSourceTags.includes(tag as SourceTag)
+          )
           .map(([tag]) => tag);
 
         for (const [tag, active] of Object.entries(sourceActivations)) {
+		  if (!availableSourceTags.includes(tag as SourceTag)) continue;
           if (active === false && post.tags.includes(tag)) return false;
         }
         if (
