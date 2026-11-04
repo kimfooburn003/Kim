@@ -126,7 +126,7 @@
     'manhwa-kr': 'manhwa (kr)',
   };
 
-  const availableFormatTags = $derived(
+  const allAvailableFormatTags = $derived(
     Array.from(
       new Set(
         augmentedPosts
@@ -135,6 +135,20 @@
       )
     ).sort()
   );
+
+	const availableFormatTags = $derived.by(() => {
+    const relevantPosts = augmentedPosts.filter(
+      (post) => bookFilter === 'all' || post.tags.includes(bookFilter)
+    );
+
+    return Array.from(
+      new Set(
+        relevantPosts
+          .flatMap((post) => post.tags)
+          .filter((tag): tag is FormatTag => FORMAT_TAGS.includes(tag as FormatTag))
+      )
+    ).sort();
+  });
 
   const availableProtagonistTags = $derived(
     Array.from(
