@@ -223,33 +223,32 @@ body {
     }
   }
 
-  .source-filter-group {
+  .source-filter-group,
+  .format-filter-group{
     @apply inline-flex items-center m-2 overflow-hidden rounded-md;
     .source-chip {
       @apply m-0 rounded-none text-lg sm:text-base font-normal cursor-pointer;
-
       &:first-child {
-        @apply rounded-l-full;
+        @apply rounded-l-md;
       }
-
       &:last-child {
-        @apply rounded-r-full;
+        @apply rounded-r-md;
       }
     }
   }
 
-  .format-filter-group {
+  /* .format-filter-group {
     @apply inline-flex items-center m-2 overflow-hidden rounded-md;
     .format-chip {
       @apply m-0 rounded-none text-lg sm:text-base cursor-pointer;
       &:first-child {
-        @apply rounded-l-full;
+        @apply rounded-l-md;
       }
       &:last-child {
-        @apply rounded-r-full;
+        @apply rounded-r-md;
       }
     }
-  }
+  } */
   
   &.review {
     button {
