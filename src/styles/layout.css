@@ -160,25 +160,24 @@ body {
       opacity: 0.45;
     }
   }
-  .protagonist-chip {
-    @apply text-cream-50 bg-green-400/80 font-medium;
-    &.active-true {
-      @apply text-accent-900 bg-cream-50;
-    }
-    &.active-false{
-      @apply text-cream-50 bg-accent-500;
-    }
-    &.active-undefined {
-      opacity: 0.45;
-    }
-  }
-
   .progression-chip {
     @apply text-cream-50 bg-accent-700 font-medium;
     &.active-true {
       @apply text-accent-900 bg-cream-50;
     }
     &.active-false {
+      @apply text-cream-50 bg-accent-500;
+    }
+    &.active-undefined {
+      opacity: 0.45;
+    }
+  }
+  .protagonist-chip {
+    @apply text-cream-50 bg-green-400/80 font-medium;
+    &.active-true {
+      @apply text-accent-900 bg-cream-50;
+    }
+    &.active-false{
       @apply text-cream-50 bg-accent-500;
     }
     &.active-undefined {
