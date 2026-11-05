@@ -885,10 +885,13 @@
 
 <div id="preamble">
   <p>
-    {totalReviews} reviews with <em>my</em> rankings based on what I personally enjoy
-    reading. You may have opposite tastes. The below inputs should make finding
-    something easier. If you have questions, recommendations, or want to know when
-    new reviews or releases are out, join the
+    Total of {totalReviews} reviews with <em>my</em> rankings based on what I usually enjoy
+    reading, slice-of-life with some progression. I have a ton of filters based on what I usually look for to limit the many options. 
+	If you want to chat about these books or have any recoomendations based on what I have reviewed, I'm <a
+      href="https://discord.gg/tfn4HVEaDz"
+      class="font-bold"
+      style="color: #7289da"
+    >Confident_Mulberry29</a> on reddit.
     <a
       href="https://discord.gg/tfn4HVEaDz"
       class="font-bold"
