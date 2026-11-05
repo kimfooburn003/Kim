@@ -890,13 +890,8 @@
 	If you want to chat about these books or have any recoomendations based on what I have reviewed, I'm <a
       href="https://www.reddit.com/user/Confident_Mulberry29/"
       class="font-bold"
-      style="color: #7289da"
+      style="color: #ff4500"
     >Confident_Mulberry29</a> on reddit.
-    <a
-      href="https://discord.gg/tfn4HVEaDz"
-      class="font-bold"
-      style="color: #7289da"
-    >discord</a>.
   </p>
 </div>
 
