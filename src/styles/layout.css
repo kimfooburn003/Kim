@@ -174,10 +174,10 @@ body {
   }
 
   :where(.tag-list .progression-chip:not(.active-true):not(.active-false)):nth-child(odd of .progression-chip) {
-    @apply text-cream-50 bg-accent-700 font-medium;
+    @apply text-cream-50 bg-accent-700/80 font-medium;
   }
   :where(.tag-list .progression-chip:not(.active-true):not(.active-false)):nth-child(even of .progression-chip) {
-    @apply text-cream-900 bg-accent-500 font-medium;
+    @apply text-cream-900 bg-accent-300/80 font-medium;
   }
   
   .protagonist-chip {
