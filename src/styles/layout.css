@@ -172,6 +172,13 @@ body {
       opacity: 0.45;
     }
   }
+
+  :where(.tag-list .progression-chip:not(.active-true):not(.active-false)):nth-child(odd of .progression-chip) {
+    @apply text-cream-50 bg-accent-700 font-medium;
+  }
+  :where(.tag-list .progression-chip:not(.active-true):not(.active-false)):nth-child(even of .progression-chip) {
+    @apply text-cream-900 bg-accent-500 font-medium;
+  }
   
   .protagonist-chip {
     @apply text-cream-50 bg-green-400/80 font-medium;
@@ -184,13 +191,6 @@ body {
     &.active-undefined {
       opacity: 0.45;
     }
-  }
-
-  :where(.tag-list .progression-chip:not(.active-true):not(.active-false)):nth-child(odd of .progression-chip) {
-    @apply bg-accent-800;
-  }
-  :where(.tag-list .progression-chip:not(.active-true):not(.active-false)):nth-child(even of .progression-chip) {
-    @apply bg-accent-700;
   }
 
   .source-chip,
