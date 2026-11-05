@@ -149,7 +149,7 @@ body {
   .filter-chip {
      @apply text-cream-50 bg-cream-600/90;
     &.active-true {
-      @apply text-accent-900 bg-green-50;
+      @apply text-green-800 bg-green-50;
       background-image: none;
     }
     &.active-false {
@@ -163,7 +163,7 @@ body {
   .progression-chip {
     @apply text-cream-50 bg-accent-700 font-medium;
     &.active-true {
-      @apply text-green-900 bg-green-50;
+      @apply text-green-800 bg-green-50;
     }
     &.active-false {
       @apply text-cream-50 bg-accent-500;
@@ -183,7 +183,7 @@ body {
   .protagonist-chip {
     @apply text-cream-50 bg-green-400/80 font-medium;
     &.active-true {
-      @apply text-green-900 bg-green-50;
+      @apply text-green-800 bg-green-50;
     }
     &.active-false{
       @apply text-cream-50 bg-accent-500;
@@ -197,7 +197,7 @@ body {
     @apply text-cream-50 bg-cream-600/90 font-medium; 
   }
   & > .protagonist-chip:not(.active-true):not(.active-false):nth-child(even of .protagonist-chip) {
-    @apply text-cream-900 bg-cream-400/90 font-medium;
+    @apply text-cream-900 bg-cream-300/90 font-medium;
   }
 
   .source-chip,
@@ -268,7 +268,7 @@ body {
   @apply text-cream-50 bg-cream-600/90;
 }
 .tag-list .tag:not(.active-true):not(.active-false):nth-child(even) {
-  @apply text-cream-900 bg-cream-400/90;
+  @apply text-cream-900 bg-cream-300/90 font-medium;
 }
 
 .year-filter-group {
