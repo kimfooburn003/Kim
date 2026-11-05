@@ -236,19 +236,6 @@ body {
       }
     }
   }
-
-  /* .format-filter-group {
-    @apply inline-flex items-center m-2 overflow-hidden rounded-md;
-    .format-chip {
-      @apply m-0 rounded-none text-lg sm:text-base cursor-pointer;
-      &:first-child {
-        @apply rounded-l-md;
-      }
-      &:last-child {
-        @apply rounded-r-md;
-      }
-    }
-  } */
   
   &.review {
     button {
@@ -261,45 +248,45 @@ body {
   }
 }
 
+/* Alternate generic tag backgrounds; active states keep their existing colours. */
+.tag-list .tag:not(.active-true):not(.active-false):nth-child(odd) {
+  @apply text-cream-50 bg-cream-600/90;
+}
+.tag-list .tag:not(.active-true):not(.active-false):nth-child(even) {
+  @apply text-cream-50 bg-cream-500/90;
+}
+
 .year-filter-group {
   @apply inline-flex items-center m-2;
 }
-
 .year-filter-all,
 .year-dropdown-trigger {
   @apply py-2 px-4 text-lg sm:text-base cursor-pointer
          bg-green-700 text-green-400
          hover:bg-green-500 hover:text-green-50;
 }
-
 .year-filter-all.is-active,
 .year-dropdown-trigger.is-active {
   @apply bg-green-500 text-green-50;
 }
-
 .year-filter-all {
   @apply rounded-l-md;
 }
-
 .year-dropdown {
   @apply relative;
 }
-
 .year-dropdown-trigger {
   @apply inline-flex items-center gap-2 rounded-r-md;
 }
-
 .year-dropdown-options {
   @apply absolute z-20 top-[calc(100%+0.25rem)] left-0 min-w-full
          max-h-64 overflow-x-hidden overflow-y-auto p-1
          rounded-lg border border-green-400/40 bg-green-700
          text-green-100 shadow-lg;
 }
-
 .year-dropdown-options button {
   @apply block w-full py-2 px-3 rounded-md text-left cursor-pointer;
 }
-
 .year-dropdown-options button:hover,
 .year-dropdown-options button[aria-selected='true'] {
   @apply bg-green-500 text-white;
