@@ -396,17 +396,17 @@
 .tag-royal-road,
 .tag-audiobook,
 .tag-ao3{
-  @apply text-green-50 bg-green-500 font-medium;
+  @apply text-green-50 bg-green-400 font-medium;
 }
 /* book status */
 .tag-completed,
 .tag-ongoing{
-  @apply text-green-50 bg-green-500 font-medium;
+  @apply text-green-50 bg-green-400 font-medium;
 }  
 /* book filter */
 .tag-series,
 .tag-book{
-  @apply text-green-50 bg-green-500 font-medium;
+  @apply text-green-50 bg-green-400 font-medium;
 }    
 /* book format */
 .tag-fanfic,
@@ -418,7 +418,7 @@
 .tag-manga-jp,
 .tag-manhua-cn,
 .tag-manhwa-kr {
-  @apply text-green-50 bg-green-500 font-medium;
+  @apply text-green-50 bg-green-400 font-medium;
 }   
 /* year */
 .tag-2015,
@@ -437,7 +437,7 @@
 .tag-2029,
 .tag-2030,
 .tag-2031{
-  @apply text-green-50 bg-green-500 font-medium;
+  @apply text-green-50 bg-green-400 font-medium;
 }    
   
 /* Turn white images to dark mode */
