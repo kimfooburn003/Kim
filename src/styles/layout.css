@@ -253,7 +253,7 @@ body {
   @apply text-cream-50 bg-cream-600/90;
 }
 .tag-list .tag:not(.active-true):not(.active-false):nth-child(even) {
-  @apply text-cream-50 bg-cream-500/90;
+  @apply text-cream-900 bg-cream-400/90;
 }
 
 .year-filter-group {
