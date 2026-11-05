@@ -1193,7 +1193,7 @@
 
     <button
       type="button"
-      class="inline-flex items-center m-2 px-4 py-2 bg-accent-500/70 hover:bg-accent-500 
+      class="inline-flex items-center m-2 px-4 py-2 bg-accent-500/80 hover:bg-accent-500 
 		!rounded-md cursor-pointer text-cream-200 text-lg sm:text-base"
       onclick={reset}
     >
