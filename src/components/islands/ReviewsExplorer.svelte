@@ -165,13 +165,15 @@
 
   // Augment posts with derived tags (extra link-derived tags + 'completed').
   function withDefaultBookTag(post: Post) {
-    return post.tags.includes('book') ? [] : ['book'];
+    return post.tags.some((tag) => BOOK_TAGS.includes(tag as BookTag))
+      ? []
+      : [BOOK_TAG];
   }
 
   function withDefaultFormatTag(post: Post) {
     return post.tags.some((tag) => FORMAT_TAGS.includes(tag as FormatTag))
       ? []
-      : ['novel'];
+      : [DEFAULT_FORMAT_TAG];
   }
 
   function withDefaultYearTag(post: Post) {
@@ -186,7 +188,7 @@
       PROTAGONIST_TAGS.includes(tag as ProtagonistTag)
     )
       ? []
-      : ['male-lead'];
+      : [DEFAULT_PROTAGONIST_TAG];
   }
   
   const augmentedPosts = $derived.by(() => {
@@ -203,8 +205,8 @@
       const defaultYearTag = withDefaultYearTag(post);
   
       const completed =
-        !post.tags.includes('ongoing') && !post.tags.includes('completed')
-          ? ['completed']
+        !STATUS_TAGS.some((tag) => post.tags.includes(tag))
+        ? [DEFAULT_STATUS_TAG]
           : [];
   
       return {
@@ -232,8 +234,7 @@
     ...PROTAGONIST_TAGS,
     ...PROGRESSION_TAGS,
     ...availableYearTags,
-    'book',
-    'series',
+    ...BOOK_TAGS,
   ] as const;
   
   const allTags = $derived(
@@ -301,8 +302,8 @@
     if (params.has('l')) out.layout = params.get('l') as Layout;
     if (params.has('status')) {
       const status = params.get('status');
-      if (status === 'completed' || status === 'ongoing') {
-        out.completionFilter = status;
+      if (STATUS_TAGS.includes(status as StatusTag)) {
+        out.completionFilter = status as StatusTag;
       }
     }
     if (params.has('source')) {
@@ -350,7 +351,7 @@
     }    
     if (params.has('book')) {
       const book = params.get('book');
-      if (book === 'book' || book === 'series') {
+      if (book === BOOK_TAG || book === SERIES_TAG) {
         out.bookFilter = book;
       }
     }
@@ -572,7 +573,7 @@
     sourceActivations = Object.fromEntries(
       allAvailableSourceTags.map((tag) => [tag, true])
     ) as Record<SourceTag, boolean>;
-    bookFilter = 'series';
+    bookFilter = SERIES_TAG;
   }
 
   // Screenshot export: capture the whole card list (not just the viewport)
@@ -621,10 +622,10 @@
         if (completionFilter === 'ongoing' && !post.tags.includes('ongoing')) {
           return false;
         }
-        if (bookFilter === 'book' && !post.tags.includes('book')) {
+        if (bookFilter === BOOK_TAG && !post.tags.includes(BOOK_TAG)) {
           return false;
         }
-        if (bookFilter === 'series' && !post.tags.includes('series')) {
+        if (bookFilter === SERIES_TAG && !post.tags.includes(SERIES_TAG)) {
           return false;
         }
         const includedSources = Object.entries(sourceActivations)
