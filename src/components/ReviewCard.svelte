@@ -16,6 +16,12 @@
     return isSquareReviewTag(tag) ? 'rounded-md' : 'rounded-full';
   }
 
+  function tagsByShape(tags: string[]): string[] {
+    return [...tags].sort(
+      (a, b) => Number(isSquareReviewTag(a)) - Number(isSquareReviewTag(b)),
+    );
+  }
+
   // Explicit sizes avoid auto sizing a newly mounted card before its grid
   // has laid out, which can request the largest candidate during transitions.
   const sizes = $derived(layout === 'wide' ? '250px' : layout === 'cover'
@@ -232,7 +238,7 @@
                   <div>
                     <div class="mb-3">
                       <ul class="flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
-                        {#each post.tags as tag (tag)}
+                        {#each tagsByShape(post.tags) as tag (tag)}
                           <li
                             class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} tag-{tag}"
                           >
