@@ -431,7 +431,7 @@
 .tag-2029,
 .tag-2030,
 .tag-2031{
-  @apply text-green-50 bg-green-500 font-medium;
+  @apply text-green-50 bg-green-900 font-medium;
 }    
   
 /* Turn white images to dark mode */
