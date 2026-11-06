@@ -1,13 +1,29 @@
  
 <script lang="ts">
   import { tick } from 'svelte';
-  import type { Post, ReviewTier } from '../../lib/types';
-	import {
+  import {
+    BOOK_TAG,
+    BOOK_TAGS,
+    DEFAULT_FORMAT_TAG,
+    DEFAULT_PROTAGONIST_TAG,
+    DEFAULT_STATUS_TAG,
+    FORMAT_LABELS,
     FORMAT_TAGS,
+    LINK_TAG_MAP,
+    PROGRESSION_LABELS,
+    PROGRESSION_TAGS,
+    PROTAGONIST_LABELS,
+    PROTAGONIST_TAGS,
+    SERIES_TAG,
+    SOURCE_LABELS,
     SOURCE_TAGS,
     STATUS_TAGS,
+    type BookTag,
     type FormatTag,
+    type ProgressionTag,
+    type ProtagonistTag,
     type SourceTag,
+    type StatusTag,
   } from '../../lib/review-tags';
   import ReviewCard from '../ReviewCard.svelte';
   import { SvelteSet } from 'svelte/reactivity';
@@ -19,47 +35,8 @@
     totalReviews: number;
   };
 
-  type BookFilter = 'all' | 'book' | 'series';
+  type BookFilter = 'all' | BookTag;
   type CompletionFilter = 'all' | 'completed' | 'ongoing';
-
-  const SOURCE_LABELS: Record<SourceTag, string> = {
-    amazon: 'Amazon',
-    audiobook: 'Audiobook',
-    'royal-road': 'Royal Road',
-    ao3: 'AO3',
-  };
-
- const PROTAGONIST_TAGS = [
-    'ensemble-cast',
-    'female-lead',
-    'male-lead',
-    'non-human-lead',
-  ] as const;
-  type ProtagonistTag = (typeof PROTAGONIST_TAGS)[number];
-  const PROTAGONIST_LABELS: Record<ProtagonistTag, string> = {
-    'ensemble-cast': 'ensemble cast',
-    'female-lead': 'female lead',
-    'male-lead': 'male lead',
-    'non-human-lead': 'non-human lead',
-  };
-
-  const PROGRESSION_TAGS = [
-    'poor-to-rich',
-   'weak-to-strong',
-    'community-building',
-    'kingdom-building',
-    'dungeon-core',
-    'relationship-building',
-  ] as const;
-  type ProgressionTag = (typeof PROGRESSION_TAGS)[number];
-  const PROGRESSION_LABELS: Record<ProgressionTag, string> = {
-    'poor-to-rich': 'poor-to-rich',
-    'weak-to-strong': 'weak-to-strong',
-    'community-building': 'community building',
-    'kingdom-building': 'kingdom building',
-    'dungeon-core': 'dungeon core',
-    'relationship-building': 'relationship building',
-  };
 
   const allAvailableSourceTags = $derived(
     Array.from(
@@ -112,18 +89,6 @@
       )
     ).sort((a, b) => Number(b) - Number(a))
   );
-  
-  const FORMAT_LABELS: Record<FormatTag, string> = {
-    fanfic: 'fanfic',
-    webnovel: 'webnovel',
-    novel: 'novel',
-    'cn-light-novel': 'cn light novel',
-    'jp-light-novel': 'jp light novel',
-    'kr-light-novel': 'kr light novel',
-    'manga-jp': 'manga (jp)',
-    'manhua-cn': 'manhua (cn)',
-    'manhwa-kr': 'manhwa (kr)',
-  };
 
   const allAvailableFormatTags = $derived(
     Array.from(
@@ -196,13 +161,6 @@
     E: { grad: 'var(--grad-e)', scrim: 0.5 },
     F: { grad: 'var(--grad-f)', scrim: 0.5 },
     G: { grad: 'var(--grad-g)', scrim: 0.5 },
-  };
-
-  const LINK_TAG_MAP: Record<string, string> = {
-    amazon: 'amazon',
-    audible: 'audiobook',
-    royal_road: 'royal-road',
-    ao3: 'ao3',
   };
 
   // Augment posts with derived tags (extra link-derived tags + 'completed').
