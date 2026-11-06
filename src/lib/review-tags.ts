@@ -115,8 +115,8 @@ export function sortReviewTags(tags: string[]): string[] {
     const aYear = /^\d{4}$/.test(a);
     const bYear = /^\d{4}$/.test(b);
     if (aYear && bYear) return Number(b) - Number(a);
-    if (aYear) return squareTagRanks.get(b)?.[0] === 3 ? -1 : 1;
-    if (bYear) return squareTagRanks.get(a)?.[0] === 3 ? 1 : -1;
+    if (aYear) return squareTagRanks.get(b)?.[0] >= 2 ? -1 : 1;
+    if (bYear) return squareTagRanks.get(a)?.[0] >= 2 ? 1 : -1;
 
     const [aGroup, aIndex] = squareTagRanks.get(a) ?? [Infinity, Infinity];
     const [bGroup, bIndex] = squareTagRanks.get(b) ?? [Infinity, Infinity];
