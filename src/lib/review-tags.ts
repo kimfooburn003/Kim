@@ -111,7 +111,7 @@ export function sortReviewTags(tags: string[]): string[] {
     if (aSquare !== bSquare) return Number(aSquare) - Number(bSquare);
     if (!aSquare) return 0;
 
-    // The explorer lists years newest first, between formats and book/series.
+    // The explorer lists years newest first, between status and source tags.
     const aYear = /^\d{4}$/.test(a);
     const bYear = /^\d{4}$/.test(b);
     if (aYear && bYear) return Number(b) - Number(a);
