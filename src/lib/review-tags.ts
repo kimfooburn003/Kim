@@ -5,6 +5,22 @@ export const DEFAULT_STATUS_TAG: StatusTag = 'completed';
 export const BOOK_TAG = 'book' as const;
 export const SERIES_TAG = 'series' as const;
 export const BOOK_TAGS = [BOOK_TAG, SERIES_TAG] as const;
+
+// Keep this group order aligned with the filter-group order in ReviewsExplorer.
+// The tag arrays above determine the order within each group.
+const SQUARE_TAG_GROUP_ORDER = [
+  STATUS_TAGS,
+  SOURCE_TAGS,
+  FORMAT_TAGS,
+  BOOK_TAGS,
+] as const;
+
+const squareTagRanks = new Map(
+  SQUARE_TAG_GROUP_ORDER.flatMap((group, groupIndex) =>
+    group.map((tag, tagIndex) => [tag, [groupIndex, tagIndex]] as const),
+  ),
+);
+
 export type BookTag = (typeof BOOK_TAGS)[number];
 
 export const SOURCE_TAGS = ['amazon', 'audiobook', 'royal-road', 'ao3'] as const;
@@ -88,4 +104,26 @@ export function isSquareReviewTag(tag: string): boolean {
     FORMAT_TAGS.includes(tag as FormatTag) ||
     /^\d{4}$/.test(tag)
   );
+}
+
+export function sortReviewTags(tags: string[]): string[] {
+  return [...tags].sort((a, b) => {
+    const aSquare = isSquareReviewTag(a);
+    const bSquare = isSquareReviewTag(b);
+
+    // Keep rounded tags first, preserving their original order.
+    if (aSquare !== bSquare) return Number(aSquare) - Number(bSquare);
+    if (!aSquare) return 0;
+
+    // The explorer lists years newest first, between formats and book/series.
+    const aYear = /^\d{4}$/.test(a);
+    const bYear = /^\d{4}$/.test(b);
+    if (aYear && bYear) return Number(b) - Number(a);
+    if (aYear) return squareTagRanks.get(b)?.[0] === 3 ? -1 : 1;
+    if (bYear) return squareTagRanks.get(a)?.[0] === 3 ? 1 : -1;
+
+    const [aGroup, aIndex] = squareTagRanks.get(a) ?? [Infinity, Infinity];
+    const [bGroup, bIndex] = squareTagRanks.get(b) ?? [Infinity, Infinity];
+    return aGroup - bGroup || aIndex - bIndex;
+  });
 }
