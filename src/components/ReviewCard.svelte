@@ -13,7 +13,7 @@
   let { post, layout, isBookmarked = false, onToggleBookmark }: Props = $props();
 
   function tagShapeClass(tag: string): string {
-    return isSquareReviewTag(tag) ? 'rounded-md' : 'rounded-full';
+    return isSquareReviewTag(tag) ? 'rounded' : 'rounded-full';
   }
 
   function tagsByShape(tags: string[]): string[] {
