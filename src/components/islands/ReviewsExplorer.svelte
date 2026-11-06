@@ -2,6 +2,13 @@
 <script lang="ts">
   import { tick } from 'svelte';
   import type { Post, ReviewTier } from '../../lib/types';
+	import {
+    FORMAT_TAGS,
+    SOURCE_TAGS,
+    STATUS_TAGS,
+    type FormatTag,
+    type SourceTag,
+  } from '../../lib/review-tags';
   import ReviewCard from '../ReviewCard.svelte';
   import { SvelteSet } from 'svelte/reactivity';
   import { captureElement } from '../../lib/screenshot';
@@ -14,10 +21,7 @@
 
   type BookFilter = 'all' | 'book' | 'series';
   type CompletionFilter = 'all' | 'completed' | 'ongoing';
-  const STATUS_TAGS = ['completed', 'ongoing'] as const;
 
-  const SOURCE_TAGS = ['amazon', 'audiobook', 'royal-road', 'ao3'] as const;
-  type SourceTag = (typeof SOURCE_TAGS)[number];
   const SOURCE_LABELS: Record<SourceTag, string> = {
     amazon: 'Amazon',
     audiobook: 'Audiobook',
@@ -108,30 +112,7 @@
       )
     ).sort((a, b) => Number(b) - Number(a))
   );
-
-  type FormatTag =
-    | 'fanfic'
-    | 'webnovel'
-    | 'novel'
-    | 'cn-light-novel'
-    | 'jp-light-novel'
-    | 'kr-light-novel'
-    | 'manga-jp'
-    | 'manhua-cn'
-    | 'manhwa-kr';
-
-  const FORMAT_TAGS = [
-    'fanfic',
-    'webnovel',
-    'novel',
-    'cn-light-novel',
-    'jp-light-novel',
-    'kr-light-novel',
-    'manga-jp',
-    'manhua-cn',
-    'manhwa-kr',
-  ] as const;
-
+  
   const FORMAT_LABELS: Record<FormatTag, string> = {
     fanfic: 'fanfic',
     webnovel: 'webnovel',
