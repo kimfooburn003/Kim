@@ -109,7 +109,18 @@ export function sortReviewTags(tags: string[]): string[] {
 
     // Keep rounded tags first, preserving their original order.
     if (aSquare !== bSquare) return Number(aSquare) - Number(bSquare);
-    if (!aSquare) return 0;
+    if (!aSquare) {
+      const group = (tag: string) =>
+        PROGRESSION_TAGS.includes(tag as ProgressionTag)
+          ? 1
+          : PROTAGONIST_TAGS.includes(tag as ProtagonistTag)
+            ? 2
+            : 0;
+
+      const groupDifference = group(a) - group(b);
+      if (groupDifference !== 0) return groupDifference;
+      return a < b ? -1 : a > b ? 1 : 0;
+    }
 
     // The explorer lists years newest first, between status and source tags.
     const aYear = /^\d{4}$/.test(a);
@@ -123,3 +134,5 @@ export function sortReviewTags(tags: string[]): string[] {
     return aGroup - bGroup || aIndex - bIndex;
   });
 }
+
+
