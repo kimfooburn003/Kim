@@ -1,28 +1,10 @@
 export const STATUS_TAGS = ['completed', 'ongoing'] as const;
 export type StatusTag = (typeof STATUS_TAGS)[number];
 export const DEFAULT_STATUS_TAG: StatusTag = 'completed';
-
 export const BOOK_TAG = 'book' as const;
 export const SERIES_TAG = 'series' as const;
 export const BOOK_TAGS = [BOOK_TAG, SERIES_TAG] as const;
-
-// Keep this group order aligned with the filter-group order in ReviewsExplorer.
-// The tag arrays above determine the order within each group.
-const SQUARE_TAG_GROUP_ORDER = [
-  STATUS_TAGS,
-  SOURCE_TAGS,
-  FORMAT_TAGS,
-  BOOK_TAGS,
-] as const;
-
-const squareTagRanks = new Map(
-  SQUARE_TAG_GROUP_ORDER.flatMap((group, groupIndex) =>
-    group.map((tag, tagIndex) => [tag, [groupIndex, tagIndex]] as const),
-  ),
-);
-
 export type BookTag = (typeof BOOK_TAGS)[number];
-
 export const SOURCE_TAGS = ['amazon', 'audiobook', 'royal-road', 'ao3'] as const;
 export type SourceTag = (typeof SOURCE_TAGS)[number];
 export const SOURCE_LABELS: Record<SourceTag, string> = {
@@ -50,6 +32,20 @@ export const FORMAT_TAGS = [
   'manhwa-kr',
 ] as const;
 export type FormatTag = (typeof FORMAT_TAGS)[number];
+// Keep this group order aligned with the filter-group order in ReviewsExplorer.
+// The tag arrays above determine the order within each group.
+const SQUARE_TAG_GROUP_ORDER = [
+  STATUS_TAGS,
+  SOURCE_TAGS,
+  FORMAT_TAGS,
+  BOOK_TAGS,
+] as const;
+
+const squareTagRanks = new Map(
+  SQUARE_TAG_GROUP_ORDER.flatMap((group, groupIndex) =>
+    group.map((tag, tagIndex) => [tag, [groupIndex, tagIndex]] as const),
+  ),
+);
 export const FORMAT_LABELS: Record<FormatTag, string> = {
   fanfic: 'fanfic',
   webnovel: 'webnovel',
