@@ -1,7 +1,7 @@
 
 <script lang="ts">
   import type { Post } from '../lib/types';
-  import { isSquareReviewTag } from '../lib/review-tags';
+  import { isSquareReviewTag, sortReviewTags } from '../lib/review-tags';
 
   type Props = {
     post: Post;
@@ -14,12 +14,6 @@
 
   function tagShapeClass(tag: string): string {
     return isSquareReviewTag(tag) ? 'rounded' : 'rounded-full';
-  }
-
-  function tagsByShape(tags: string[]): string[] {
-    return [...tags].sort(
-      (a, b) => Number(isSquareReviewTag(a)) - Number(isSquareReviewTag(b)),
-    );
   }
 
   // Explicit sizes avoid auto sizing a newly mounted card before its grid
@@ -238,7 +232,7 @@
                   <div>
                     <div class="mb-3">
                       <ul class="flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
-                        {#each tagsByShape(post.tags) as tag (tag)}
+                        {#each sortReviewTags(post.tags) as tag (tag)}
                           <li
                             class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} tag-{tag}"
                           >
