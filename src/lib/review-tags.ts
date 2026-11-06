@@ -35,10 +35,10 @@ export type FormatTag = (typeof FORMAT_TAGS)[number];
 // Keep this group order aligned with the filter-group order in ReviewsExplorer.
 // The tag arrays above determine the order within each group.
 const SQUARE_TAG_GROUP_ORDER = [
+  BOOK_TAGS,
   STATUS_TAGS,
   SOURCE_TAGS,
-  FORMAT_TAGS,
-  BOOK_TAGS,
+  FORMAT_TAGS,  
 ] as const;
 
 const squareTagRanks = new Map(
