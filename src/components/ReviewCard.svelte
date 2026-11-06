@@ -1,6 +1,7 @@
 
 <script lang="ts">
   import type { Post } from '../lib/types';
+  import { isSquareReviewTag } from '../lib/review-tags';
 
   type Props = {
     post: Post;
@@ -10,6 +11,10 @@
   };
 
   let { post, layout, isBookmarked = false, onToggleBookmark }: Props = $props();
+
+  function tagShapeClass(tag: string): string {
+    return isSquareReviewTag(tag) ? 'rounded-md' : 'rounded-full';
+  }
 
   // Explicit sizes avoid auto sizing a newly mounted card before its grid
   // has laid out, which can request the largest candidate during transitions.
@@ -229,7 +234,7 @@
                       <ul class="flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
                         {#each post.tags as tag (tag)}
                           <li
-                            class="m-1 inline-flex text-center py-1 px-3 rounded-full tag-{tag}"
+                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} tag-{tag}"
                           >
                             {tag}
                           </li>
