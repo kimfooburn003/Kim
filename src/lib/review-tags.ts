@@ -32,7 +32,7 @@ export const FORMAT_TAGS = [
   'manga-jp',
   'manhua-cn',
   'manhwa-kr',
- as const;
+] as const;
 export type FormatTag = (typeof FORMAT_TAGS)[number];
 export const FORMAT_LABELS: Record<FormatTag, string> = {
   fanfic: 'fanfic',
