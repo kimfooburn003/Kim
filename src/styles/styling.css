@@ -371,16 +371,14 @@
 .tag-superhero,
 .tag-wholesome,
 .tag-isekai,
-.tag-vrmmo{
-  @apply bg-cream-600 text-accent-100 font-medium;
-}  
+.tag-vrmmo,
+  
 /* protagonist type */
 .tag-ensemble-cast,
 .tag-female-lead,
 .tag-male-lead,
-.tag-non-human-lead {
-  @apply bg-accent-600 text-accent-100 font-medium;
-}  
+.tag-non-human-lead,
+  
 /* progression type */
 .tag-dungeon-core,
 .tag-kingdom-building,
@@ -388,26 +386,23 @@
 .tag-relationship-building,
 .tag-weak-to-strong,
 .tag-poor-to-rich{
-  @apply bg-green-600 text-green-100 font-medium;
+  @apply bg-cream-600 text-accent-50 font-medium;
 }  
   
 /* book source */
 .tag-amazon,
 .tag-royal-road,
 .tag-audiobook,
-.tag-ao3{
-  @apply text-green-50 bg-green-400 font-medium;
-}
+.tag-ao3,
+  
 /* book status */
 .tag-completed,
-.tag-ongoing{
-  @apply text-green-50 bg-green-400 font-medium;
-}  
+.tag-ongoing,
+  
 /* book filter */
 .tag-series,
-.tag-book{
-  @apply text-green-50 bg-green-400 font-medium;
-}    
+.tag-book,
+  
 /* book format */
 .tag-fanfic,
 .tag-webnovel,
@@ -417,9 +412,8 @@
 .tag-kr-light-novel,
 .tag-manga-jp,
 .tag-manhua-cn,
-.tag-manhwa-kr {
-  @apply text-green-50 bg-green-400 font-medium;
-}   
+.tag-manhwa-kr,
+  
 /* year */
 .tag-2015,
 .tag-2016,
@@ -437,7 +431,7 @@
 .tag-2029,
 .tag-2030,
 .tag-2031{
-  @apply text-green-50 bg-green-400 font-medium;
+  @apply text-green-50 bg-green-500 font-medium;
 }    
   
 /* Turn white images to dark mode */
