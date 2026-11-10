@@ -276,7 +276,7 @@
                         aria-label="Series word count"
                       >
                         <li class="series-wordcount-tag rounded m-1 inline-flex text-center py-1 px-3">
-                          Series: {formatSeriesWordCount(post.serieswordcount)} words
+                          {formatSeriesWordCount(post.serieswordcount)} words
                         </li>
                       </ul>
                     {/if}
