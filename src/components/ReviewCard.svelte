@@ -290,8 +290,8 @@
                           </li>
                         {/each}
                         {#if post.serieswordcount != null}
-                          <li class="series-wordcount-tag rounded m-1 inline-flex text-center py-1 px-3">
-                            Series: {formatSeriesWordCount(post.serieswordcount)} words
+                          <li class="tag-wordcount rounded m-1 inline-flex text-center py-1 px-3">
+                            {formatSeriesWordCount(post.serieswordcount)} words
                           </li>
                         {/if}
                       </ul>                      
