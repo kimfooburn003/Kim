@@ -30,6 +30,10 @@
     return isSquareReviewTag(tag) ? 'rounded' : 'rounded-full';
   }
 
+  function formatSeriesWordCount(count: number): string {
+    return new Intl.NumberFormat('en-US').format(count);
+  }
+
   function roundedTagColorClass(tag: string): string {
     if (isSquareReviewTag(tag)) return '';
     if (PROGRESSION_TAGS.includes(tag as ProgressionTag)) {
