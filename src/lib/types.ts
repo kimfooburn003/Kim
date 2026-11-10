@@ -16,6 +16,7 @@ export interface Post {
   /** ISO-8601 date string. */
   date: string;
   tags: string[];
+  serieswordcount?: number;
   links: { name: string; link: string }[];
   sentence: string;
   description: string;
