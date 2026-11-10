@@ -8,6 +8,7 @@ auth: nobody13
 categories: [reviews]
 review: S
 weight: 000001
+serieswordcount: 800000
 links:
     amazon: https://www.amazon.com/dp/B09M2R6QLF
     royal_road: https://www.royalroad.com/fiction/21220/mother-of-learning
