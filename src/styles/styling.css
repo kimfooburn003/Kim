@@ -433,6 +433,20 @@
 .tag-2031{
   @apply text-green-50 bg-green-800 font-medium;
 }    
+
+/* Alternate rounded-tag colors by category, like the default explorer chips.
+   The "of .class" selector counts each category independently. */
+.review-card-tags > .review-tag-generic:nth-child(odd of .review-tag-generic),
+.review-card-tags > .review-tag-progression:nth-child(odd of .review-tag-progression),
+.review-card-tags > .review-tag-protagonist:nth-child(odd of .review-tag-protagonist) {
+  @apply text-cream-50 bg-cream-600/90 font-medium;
+}
+
+.review-card-tags > .review-tag-generic:nth-child(even of .review-tag-generic),
+.review-card-tags > .review-tag-progression:nth-child(even of .review-tag-progression),
+.review-card-tags > .review-tag-protagonist:nth-child(even of .review-tag-protagonist) {
+  @apply text-cream-900 bg-cream-300/90 font-medium;
+}
   
 /* Turn white images to dark mode */
 .img-invert {
