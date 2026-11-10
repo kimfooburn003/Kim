@@ -272,7 +272,7 @@
                           <li
                             class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {tagColorClasses[tag] ?? ''} tag-{tag}"
                           >
-                            {tag}
+                            {tag === 'royal-road' ? 'royal road' : tag}
                           </li>
                         {/each}                        
                         {#each sortReviewTags(
