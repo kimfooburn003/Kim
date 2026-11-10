@@ -261,7 +261,9 @@
                   <div>
                     <div class="mb-3">
                       <ul class="review-card-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
-                        {#each sortReviewTags(post.tags) as tag (tag)}
+                        {#each sortReviewTags(
+                          post.tags.filter((tag) => tag !== 'book' && tag !== 'series')
+                        ) as tag (tag)}
                           <li
                             class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {tagColorClasses[tag] ?? ''} tag-{tag}"
                           >
