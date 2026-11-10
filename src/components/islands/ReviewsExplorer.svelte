@@ -165,9 +165,7 @@
 
   // Augment posts with derived tags (extra link-derived tags + 'completed').
   function withDefaultBookTag(post: Post) {
-    return post.tags.some((tag) => BOOK_TAGS.includes(tag as BookTag))
-      ? []
-      : [BOOK_TAG];
+    return post.tags.includes(BOOK_TAG) ? [] : [BOOK_TAG];
   }
 
   function withDefaultFormatTag(post: Post) {
