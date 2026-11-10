@@ -901,7 +901,7 @@
             ? 'bg-green-500 text-green-50'
             : 'bg-green-700 text-green-400 hover:bg-green-500 hover:text-green-50'
         }`}
-        onclick={() => (bookFilter = bookFilter === 'series' ? 'all' : 'series')}
+        onclick={() => (bookFilter = 'series')}
       >
         Series
       </button>
@@ -912,7 +912,7 @@
             ? 'bg-green-500 text-green-50'
             : 'bg-green-700 text-green-400 hover:bg-green-500 hover:text-green-50'
         }`}
-        onclick={() => (bookFilter = bookFilter === 'book' ? 'all' : 'book')}
+        onclick={() => (bookFilter = 'book')}
       >
         Book
       </button>
