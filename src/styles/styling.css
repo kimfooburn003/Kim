@@ -430,7 +430,9 @@
 .tag-2028,
 .tag-2029,
 .tag-2030,
-.tag-2031{
+.tag-2031,
+  
+.tag-wordcount {
   /* @apply text-green-50 border-1 border-green-400/80 bg-green-800/70 font-medium; */
   @apply text-green-900 border-1 border-green-500 bg-green-300 font-medium;
 }    
