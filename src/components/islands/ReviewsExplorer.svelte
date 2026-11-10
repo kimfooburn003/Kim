@@ -28,6 +28,7 @@
   import ReviewCard from '../ReviewCard.svelte';
   import { SvelteSet } from 'svelte/reactivity';
   import { captureElement } from '../../lib/screenshot';
+	import { formatWordCount } from '../../lib/wordcount';
 
   type Layout = 'wide' | 'cover' | 'tier';
   type Props = {
@@ -834,6 +835,12 @@
   
   function bookChipState(value: BookFilter): ChipState {
     return chipState(bookFilter === value, bookFilter !== 'all');
+  }
+
+	function seriesWordCountLabel(post: Post): string {
+    return post.serieswordcount == null
+      ? ''
+      : `${formatWordCount(post.serieswordcount)} words`;
   }
 </script>
 
