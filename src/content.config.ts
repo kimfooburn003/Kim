@@ -18,14 +18,14 @@ const reviews = defineCollection({
       weight: z.number(),
       tags: z.array(z.string()).default([]),
       serieswordcount: z.preprocess(
-+        (value) => {
-+          if (typeof value !== 'string') return value;
-+          const trimmed = value.trim();
-+          if (!/^(?:\d+|\d{1,3}(?:,\d{3})+)$/.test(trimmed)) return value;
-+          return Number(trimmed.replaceAll(',', ''));
-+        },
-+        z.number().int().positive()
-+      ).optional(),
+        (value) => {
+          if (typeof value !== 'string') return value;
+          const trimmed = value.trim();
+          if (!/^(?:\d+|\d{1,3}(?:,\d{3})+)$/.test(trimmed)) return value;
+          return Number(trimmed.replaceAll(',', ''));
+        },
+        z.number().int().positive()
+      ).optional(),
       search_terms: z.string().default(''),
       aliases: z.array(z.string()).default([]),
       // The frontmatter uses Hugo's `links: { amazon: "...", audible: "..." }`
