@@ -443,7 +443,7 @@
 }
 
 .review-card-tags > .review-tag-light {
-  @apply text-green-900 bg-green-300 font-medium;
+  @apply text-cream-900 bg-cream-300/90 font-medium;
 }
 
 .review-card-tags > .square-review-tag:nth-child(odd of .square-review-tag) {
