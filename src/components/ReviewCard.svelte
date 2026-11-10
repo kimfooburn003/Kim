@@ -271,8 +271,7 @@
                           </li>
                         {/each}
                       </ul>
-                    </div>
-                    {#if post.serieswordcount != null}
+                      {#if post.serieswordcount != null}
                       <ul
                         class="review-card-tags series-word-count-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center"
                         aria-label="Series word count"
@@ -282,6 +281,7 @@
                         </li>
                       </ul>
                     {/if}
+                    </div>                    
                   </div>
                 </div>
               {/if}
