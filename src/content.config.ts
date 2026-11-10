@@ -17,6 +17,7 @@ const reviews = defineCollection({
       review: REVIEW_TIER,
       weight: z.number(),
       tags: z.array(z.string()).default([]),
+      serieswordcount: z.number().int().positive().optional(),
       search_terms: z.string().default(''),
       aliases: z.array(z.string()).default([]),
       // The frontmatter uses Hugo's `links: { amazon: "...", audible: "..." }`
