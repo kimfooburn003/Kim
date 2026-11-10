@@ -13,11 +13,18 @@
   type Props = {
     post: Post;
     layout: 'wide' | 'cover' | 'tier';
+    tagColorClasses?: Record<string, string>;
     isBookmarked?: boolean;
     onToggleBookmark?: (slug: string) => void;
   };
 
-  let { post, layout, isBookmarked = false, onToggleBookmark }: Props = $props();
+  let {
+    post,
+    layout,
+    tagColorClasses = {},
+    isBookmarked = false,
+    onToggleBookmark,
+  }: Props = $props();
 
   function tagShapeClass(tag: string): string {
     return isSquareReviewTag(tag) ? 'rounded' : 'rounded-full';
@@ -252,7 +259,7 @@
                       <ul class="review-card-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
                         {#each sortReviewTags(post.tags) as tag (tag)}
                           <li
-                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {roundedTagColorClass(tag)} tag-{tag}"
+                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {tagColorClasses[tag] ?? ''} tag-{tag}"
                           >
                             {tag}
                           </li>
