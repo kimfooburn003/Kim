@@ -263,7 +263,21 @@
                       <ul class="review-card-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
                         {#each sortReviewTags(
                           post.tags.filter(
-                           (tag) =>
+                            (tag) =>
+                              tag !== 'book' &&
+                              tag !== 'series' &&
+                              !isSquareReviewTag(tag)
+                          )
+                        ) as tag (tag)}
+                          <li
+                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {tagColorClasses[tag] ?? ''} tag-{tag}"
+                          >
+                            {tag}
+                          </li>
+                        {/each}                        
+                        {#each sortReviewTags(
+                          post.tags.filter(
+                            (tag) =>
                               tag !== 'book' &&
                               tag !== 'series' &&
                               isSquareReviewTag(tag)
@@ -280,20 +294,6 @@
                             Series: {formatSeriesWordCount(post.serieswordcount)} words
                           </li>
                         {/if}
-                        {#each sortReviewTags(
-                          post.tags.filter(
-                            (tag) =>
-                              tag !== 'book' &&
-                              tag !== 'series' &&
-                              !isSquareReviewTag(tag)
-                          )
-                        ) as tag (tag)}
-                          <li
-                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {tagColorClasses[tag] ?? ''} tag-{tag}"
-                          >
-                            {tag}
-                          </li>
-                        {/each}
                       </ul>                      
                     </div>                    
                   </div>
