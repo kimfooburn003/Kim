@@ -25,6 +25,7 @@ const posts: Post[] = await Promise.all(
       weight: entry.data.weight,
       date: entry.data.date.toISOString(),
       tags: sortedTags,
+      serieswordcount: entry.data.serieswordcount,
       links: Object.entries(entry.data.links).map(([name, link]) => ({ name, link })),
       sentence: entry.data.sentence,
       description: entry.data.description,
