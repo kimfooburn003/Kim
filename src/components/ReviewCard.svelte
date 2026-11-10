@@ -262,7 +262,12 @@
                     <div class="mb-3">
                       <ul class="review-card-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
                         {#each sortReviewTags(
-                          post.tags.filter((tag) => tag !== 'book' && tag !== 'series')
+                          post.tags.filter(
+                           (tag) =>
+                              tag !== 'book' &&
+                              tag !== 'series' &&
+                              isSquareReviewTag(tag)
+                          )
                         ) as tag (tag)}
                           <li
                             class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {tagColorClasses[tag] ?? ''} tag-{tag}"
@@ -270,17 +275,26 @@
                             {tag}
                           </li>
                         {/each}
-                      </ul>
-                      {#if post.serieswordcount != null}
-                      <ul
-                        class="review-card-tags series-word-count-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center"
-                        aria-label="Series word count"
-                      >
-                        <li class="series-wordcount-tag rounded m-1 inline-flex text-center py-1 px-3">
-                          {formatSeriesWordCount(post.serieswordcount)} words
-                        </li>
-                      </ul>
-                    {/if}
+                        {#if post.serieswordcount != null}
+                          <li class="series-wordcount-tag rounded m-1 inline-flex text-center py-1 px-3">
+                            Series: {formatSeriesWordCount(post.serieswordcount)} words
+                          </li>
+                        {/if}
+                        {#each sortReviewTags(
+                          post.tags.filter(
+                            (tag) =>
+                              tag !== 'book' &&
+                              tag !== 'series' &&
+                              !isSquareReviewTag(tag)
+                          )
+                        ) as tag (tag)}
+                          <li
+                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {tagColorClasses[tag] ?? ''} tag-{tag}"
+                          >
+                            {tag}
+                          </li>
+                        {/each}
+                      </ul>                      
                     </div>                    
                   </div>
                 </div>
