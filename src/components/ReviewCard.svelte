@@ -270,6 +270,16 @@
                         {/each}
                       </ul>
                     </div>
+                    {#if post.serieswordcount != null}
+                      <ul
+                        class="review-card-tags series-word-count-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center"
+                        aria-label="Series word count"
+                      >
+                        <li class="series-wordcount-tag rounded m-1 inline-flex text-center py-1 px-3">
+                          Series: {formatSeriesWordCount(post.serieswordcount)} words
+                        </li>
+                      </ul>
+                    {/if}
                   </div>
                 </div>
               {/if}
