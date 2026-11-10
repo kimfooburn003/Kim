@@ -431,7 +431,7 @@
 .tag-2029,
 .tag-2030,
 .tag-2031{
-  @apply text-green-50 border-1 border-green-500 bg-green-700/80 font-medium;
+  @apply text-green-50 border-1 border-green-500 bg-green-800/80 font-medium;
 }    
 
 /* Match the default alternating colors used by the ReviewsExplorer filters. */
