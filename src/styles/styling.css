@@ -443,6 +443,10 @@
 .review-card-tags > .review-tag-light {
   @apply text-cream-900 bg-cream-300/90 font-medium;
 }
+
+.series-word-count-tags > .series-wordcount-tag {
+  @apply text-green-900 border-1 border-green-500 bg-green-300 font-medium;
+}
   
 /* Turn white images to dark mode */
 .img-invert {
