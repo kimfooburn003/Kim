@@ -1,7 +1,14 @@
   
 <script lang="ts">
   import type { Post } from '../lib/types';
-  import { isSquareReviewTag, sortReviewTags } from '../lib/review-tags';
+  import {
+    isSquareReviewTag,
+    PROGRESSION_TAGS,
+    PROTAGONIST_TAGS,
+    sortReviewTags,
+    type ProgressionTag,
+    type ProtagonistTag,
+  } from '../lib/review-tags';
 
   type Props = {
     post: Post;
@@ -14,6 +21,17 @@
 
   function tagShapeClass(tag: string): string {
     return isSquareReviewTag(tag) ? 'rounded' : 'rounded-full';
+  }
+
+  function roundedTagColorClass(tag: string): string {
+    if (isSquareReviewTag(tag)) return '';
+    if (PROGRESSION_TAGS.includes(tag as ProgressionTag)) {
+      return 'review-tag-progression';
+    }
+    if (PROTAGONIST_TAGS.includes(tag as ProtagonistTag)) {
+      return 'review-tag-protagonist';
+    }
+    return 'review-tag-generic';
   }
 
   // Explicit sizes avoid auto sizing a newly mounted card before its grid
@@ -231,10 +249,10 @@
                   <p class="text-lg text-green-300 px-3">{post.sentence}</p>
                   <div>
                     <div class="mb-3">
-                      <ul class="flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
+                      <ul class="review-card-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
                         {#each sortReviewTags(post.tags) as tag (tag)}
                           <li
-                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} tag-{tag}"
+                            class="m-1 inline-flex text-center py-1 px-3 {tagShapeClass(tag)} {roundedTagColorClass(tag)} tag-{tag}"
                           >
                             {tag}
                           </li>
