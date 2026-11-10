@@ -247,6 +247,22 @@
     ).sort()
   );
 
+	// Match the explorer's alternating default colors. The first (odd) item
+  // in each filter group is dark; the second (even) item is light.
+  const reviewTagColorClasses = $derived.by(() => {
+    const classes: Record<string, string> = {};
+    const assignColors = (tags: readonly string[]) => {
+      tags.forEach((tag, index) => {
+        classes[tag] = index % 2 === 0 ? 'review-tag-dark' : 'review-tag-light';
+      });
+    };
+
+    assignColors(allTags);
+    assignColors(availableProgressionTags);
+    assignColors(availableProtagonistTags);
+    return classes;
+  });
+
   // Initial layout default depends on screen width — guard for SSR.
   const defaultLayout: Layout =
     typeof globalThis !== 'undefined' &&
@@ -1176,6 +1192,7 @@
     <ReviewCard
       {post}
       {layout}
+			tagColorClasses={reviewTagColorClasses}
       isBookmarked={readingList.has(slugFromAbslink(post.abslink))}
       onToggleBookmark={layout === 'tier' ? undefined : toggleBookmark}
     />
