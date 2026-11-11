@@ -447,11 +447,11 @@
 }
 
 .review-card-tags > .square-review-tag:nth-child(odd of .square-review-tag) {
-  @apply text-green-50 bg-green-400/60 font-medium;
+  @apply text-green-50 bg-green-400/50 font-medium;
 }
 
 .review-card-tags > .square-review-tag:nth-child(even of .square-review-tag) {
-  @apply text-green-900 bg-green-300/90 font-medium;
+  @apply text-green-900 bg-green-300/95 font-medium;
 }
 
 /* .series-word-count-tags > .series-wordcount-tag {
