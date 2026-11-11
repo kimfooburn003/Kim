@@ -5,7 +5,17 @@ import CoverImage from '../../components/CoverImage.astro';
 //import NewsletterForm from '../../components/NewsletterForm.astro';
 import ReviewCoverCard from '../../components/ReviewCoverCard.astro';
 import { getSimilarReviews } from '../../lib/content';
-import { SOURCE_TAGS, sortReviewTags, type SourceTag } from '../../lib/review-tags';
+import {
+  BOOK_TAGS,
+  FORMAT_TAGS,
+  PROGRESSION_TAGS,
+  PROTAGONIST_TAGS,
+  SOURCE_TAGS,
+  STATUS_TAGS,
+ isSquareReviewTag,
+  sortReviewTags,
+  type SourceTag,
+} from '../../lib/review-tags';
 import { withBase } from '../../config';
 
 export async function getStaticPaths() {
@@ -43,6 +53,35 @@ const titleCase = (s: string) => s.replaceAll('_', ' ').replace(/\b\w/g, (c) => 
 
 const similarReviews = getSimilarReviews(entry, allEntries, 4);
 
+const reviewTags = sortReviewTags(
+  entry.data.tags.filter((tag) => !SOURCE_TAGS.includes(tag as SourceTag)),
+);
+const specialTags = [
+  ...BOOK_TAGS,
+  ...STATUS_TAGS,
+  ...SOURCE_TAGS,
+  ...FORMAT_TAGS,
+  ...PROGRESSION_TAGS,
+  ...PROTAGONIST_TAGS,
+];
+const allTags = [
+  ...new Set(
+    allEntries
+      .flatMap((review) => review.data.tags)
+      .filter((tag) => !specialTags.includes(tag as (typeof specialTags)[number]) && !/^\d{4}$/.test(tag)),
+  ),
+].sort();
+const tagColorClasses: Record<string, string> = {};
+const assignTagColors = (tags: readonly string[]) => {
+  tags.forEach((tag, index) => {
+    tagColorClasses[tag] = index % 2 === 0 ? 'review-tag-dark' : 'review-tag-light';
+  });
+};
+assignTagColors(allTags);
+const knownTags = new Set(allEntries.flatMap((review) => review.data.tags));
+assignTagColors(PROGRESSION_TAGS.filter((tag) => knownTags.has(tag)));
+assignTagColors(PROTAGONIST_TAGS.filter((tag) => knownTags.has(tag)));
+
 // Reddit-ready markdown for the `c` shortcut, built server-side so the page
 // ships one string rather than the formatting logic. `entry.body` is the raw
 // markdown source, matching what the Hugo template pasted in via `.RawContent`.
@@ -79,10 +118,15 @@ const reviewMarkdown =
                 <p class={`larger rating-${r}`}>{ratingText}</p>
               </div>
               <p class="text-lg text-green-400">{entry.data.description}</p>
-              <ul class="review-card-tags flex flex-wrap text-sm font-medium -m-1 justify-center md:justify-start">
-                {reviewTags.map((tag) => (
-                  <li class={`m-1 inline-flex text-center py-1 px-3 rounded-full tag-${tag}`}>
-                    {tag.replaceAll('-', ' ')}
+              <ul class="review-card-tags flex flex-wrap text-sm sm:text-xs font-medium -m-1 justify-center">
+                {reviewTags.filter((tag) => !isSquareReviewTag(tag)).map((tag) => (
+                  <li class={`m-1 inline-flex text-center py-1 px-3 rounded-full ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                    {tag === 'royal-road' ? 'royal road' : tag}
+                  </li>
+                ))}
+                {reviewTags.filter(isSquareReviewTag).map((tag) => (
+                  <li class={`square-review-tag m-1 inline-flex text-center py-1 px-3 rounded ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                    {tag}
                   </li>
                 ))}
               </ul>
