@@ -447,7 +447,7 @@
 }
 
 .review-card-tags > .square-review-tag:nth-child(odd of .square-review-tag) {
-  @apply text-green-50 bg-green-500 font-medium;
+  @apply text-green-50 bg-green-400 font-medium;
 }
 
 .review-card-tags > .square-review-tag:nth-child(even of .square-review-tag) {
