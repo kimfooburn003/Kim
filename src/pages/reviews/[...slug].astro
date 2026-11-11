@@ -5,6 +5,7 @@ import CoverImage from '../../components/CoverImage.astro';
 //import NewsletterForm from '../../components/NewsletterForm.astro';
 import ReviewCoverCard from '../../components/ReviewCoverCard.astro';
 import { getSimilarReviews } from '../../lib/content';
+import { SOURCE_TAGS, sortReviewTags, type SourceTag } from '../../lib/review-tags';
 import { withBase } from '../../config';
 
 export async function getStaticPaths() {
@@ -15,6 +16,9 @@ export async function getStaticPaths() {
 const { entry, allEntries } = Astro.props;
 const { Content } = await render(entry);
 const r = entry.data.review;
+const reviewTags = sortReviewTags(
+  entry.data.tags.filter((tag) => !SOURCE_TAGS.includes(tag as SourceTag)),
+);
 
 const ogImage = `/og/${entry.id}.webp`;
 const ogDescription =
@@ -75,6 +79,13 @@ const reviewMarkdown =
                 <p class={`larger rating-${r}`}>{ratingText}</p>
               </div>
               <p class="text-lg text-green-400">{entry.data.description}</p>
+              <ul class="review-card-tags flex flex-wrap text-sm font-medium -m-1 justify-center md:justify-start">
+                {reviewTags.map((tag) => (
+                  <li class={`m-1 inline-flex text-center py-1 px-3 rounded-full tag-${tag}`}>
+                    {tag.replaceAll('-', ' ')}
+                  </li>
+                ))}
+              </ul>
               <div class="text-base">
                 {Object.entries(entry.data.links).map(([name, link]) => (
                   <a
