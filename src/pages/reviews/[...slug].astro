@@ -53,9 +53,6 @@ const titleCase = (s: string) => s.replaceAll('_', ' ').replace(/\b\w/g, (c) => 
 
 const similarReviews = getSimilarReviews(entry, allEntries, 4);
 
-const reviewTags = sortReviewTags(
-  entry.data.tags.filter((tag) => !SOURCE_TAGS.includes(tag as SourceTag)),
-);
 const specialTags = [
   ...BOOK_TAGS,
   ...STATUS_TAGS,
