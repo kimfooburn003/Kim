@@ -131,17 +131,17 @@ const reviewMarkdown =
               <p class="text-lg text-green-400">{entry.data.description}</p>
               <ul class="review-card-tags flex flex-wrap gap-2 text-xs font-medium justify-center md:justify-start">
                 {reviewTags.filter((tag) => !isSquareReviewTag(tag)).map((tag) => (
-                  <li class={`inline-flex text-center rounded-full py-1 px-3 ${compactControlSize} ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                  <li class={`inline-flex text-center rounded-full ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
                     {tag === 'royal-road' ? 'royal road' : tag}
                   </li>
                 ))}
                 {reviewTags.filter(isSquareReviewTag).map((tag) => (
-                  <li class={`square-review-tag inline-flex text-center rounded py-1 px-3 ${compactControlSize} ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                  <li class={`square-review-tag inline-flex text-center rounded ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
                     {tag}
                   </li>
                 ))}
                 {entry.data.serieswordcount != null && (
-                  <li class={`square-review-tag tag-wordcount inline-flex text-center rounded py-1 px-3 ${compactControlSize}`}>
+                  <li class="square-review-tag tag-wordcount inline-flex text-center rounded">
                     {formatWordCount(entry.data.serieswordcount)} words
                   </li>
                 )}
