@@ -51,6 +51,7 @@ const RATING_TEXT = {
 const ratingText = RATING_TEXT[r];
 
 const titleCase = (s: string) => s.replaceAll('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+const compactControlSize = 'text-[0.7rem] !px-1.5 !py-0.5';
 
 const similarReviews = getSimilarReviews(entry, allEntries, 4);
 const hasBookTag = entry.data.tags.some((tag) => BOOK_TAGS.includes(tag as (typeof BOOK_TAGS)[number]));
@@ -130,17 +131,17 @@ const reviewMarkdown =
               <p class="text-lg text-green-400">{entry.data.description}</p>
               <ul class="review-card-tags flex flex-wrap gap-2 text-xs font-medium justify-center md:justify-start">
                 {reviewTags.filter((tag) => !isSquareReviewTag(tag)).map((tag) => (
-                  <li class={`inline-flex text-center py-0.5 px-2 rounded-full ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                  <li class={`inline-flex text-center rounded-full ${compactControlSize} ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
                     {tag === 'royal-road' ? 'royal road' : tag}
                   </li>
                 ))}
                 {reviewTags.filter(isSquareReviewTag).map((tag) => (
-                  <li class={`square-review-tag inline-flex text-center py-0.5 px-2 rounded ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                  <li class={`square-review-tag inline-flex text-center rounded ${compactControlSize} ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
                     {tag}
                   </li>
                 ))}
                 {entry.data.serieswordcount != null && (
-                  <li class="square-review-tag tag-wordcount inline-flex text-center py-0.5 px-2 rounded">
+                  <li class={`square-review-tag tag-wordcount inline-flex text-center rounded ${compactControlSize}`}>
                     {formatWordCount(entry.data.serieswordcount)} words
                   </li>
                 )}
@@ -148,7 +149,7 @@ const reviewMarkdown =
               <div class="text-base flex flex-wrap justify-center md:justify-start">
                 {Object.entries(entry.data.links).map(([name, link]) => (
                   <a
-                    class={`no-under btn-xs text-xs text-white bg-${r}-700 hover:bg-${r}-600 mt-2 mr-2 !px-2 !py-0.5`}
+                    class={`no-under btn-xs ${compactControlSize} text-white bg-${r}-700 hover:bg-${r}-600 mt-2 mr-2`}
                     href={link}
                   >
                     <span>{titleCase(name)}</span>
