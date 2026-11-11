@@ -254,8 +254,8 @@
 
 @media (min-width: 640px) {
   padding: 0.125rem 0.5rem;
-  font-size: 0.6875rem;
-  line-height: 0.875rem;
+  font-size: 0.625rem;
++  line-height: 0.75rem;
 }
  
   /* Review pages: make H2/H3 align with the paragraph body */
