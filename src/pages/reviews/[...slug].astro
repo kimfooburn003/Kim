@@ -51,7 +51,7 @@ const RATING_TEXT = {
 const ratingText = RATING_TEXT[r];
 
 const titleCase = (s: string) => s.replaceAll('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-const compactControlSize = 'text-[0.7rem] !px-1.5 !py-0.5';
+const compactControlSize = 'text-[0.4rem] !px-1.5 !py-0.5';
 
 const similarReviews = getSimilarReviews(entry, allEntries, 4);
 const hasBookTag = entry.data.tags.some((tag) => BOOK_TAGS.includes(tag as (typeof BOOK_TAGS)[number]));
