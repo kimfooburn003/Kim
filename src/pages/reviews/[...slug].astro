@@ -98,7 +98,7 @@ const reviewMarkdown =
 <BaseLayout title={entry.data.name} description={ogDescription} image={ogImage} type="article">
   <div class="content content blog-post relative">
     <div class="section-header blog">
-      <h1 class={`title rating rating-${r}`}>{entry.data.name}</h1>
+      <h1 class={`title rating rating-${r} text-center`}>{entry.data.name}</h1>
     </div>
     <div class="max-w-4xl mx-auto mt-4 mb-16">
       <article class={`w-full review-summary bg-green-800 rounded-xl review-${r}`}>
@@ -127,7 +127,7 @@ const reviewMarkdown =
                   </li>
                 ))}
               </ul>
-              <div class="text-base">
+              <div class="text-base flex flex-wrap justify-center">
                 {Object.entries(entry.data.links).map(([name, link]) => (
                   <a
                     class={`no-under btn-xs text-sm text-white bg-${r}-700 hover:bg-${r}-600 mt-2 mr-4`}
