@@ -6,16 +6,20 @@ import CoverImage from '../../components/CoverImage.astro';
 import ReviewCoverCard from '../../components/ReviewCoverCard.astro';
 import { getSimilarReviews } from '../../lib/content';
 import {
+  BOOK_TAG,
   BOOK_TAGS,
+  DEFAULT_FORMAT_TAG,
+  DEFAULT_STATUS_TAG,
   FORMAT_TAGS,
   PROGRESSION_TAGS,
   PROTAGONIST_TAGS,
   SOURCE_TAGS,
   STATUS_TAGS,
- isSquareReviewTag,
+  isSquareReviewTag,
   sortReviewTags,
   type SourceTag,
 } from '../../lib/review-tags';
+import { formatWordCount } from '../../lib/wordcount';
 import { withBase } from '../../config';
 
 export async function getStaticPaths() {
@@ -26,9 +30,6 @@ export async function getStaticPaths() {
 const { entry, allEntries } = Astro.props;
 const { Content } = await render(entry);
 const r = entry.data.review;
-const reviewTags = sortReviewTags(
-  entry.data.tags.filter((tag) => !SOURCE_TAGS.includes(tag as SourceTag)),
-);
 
 const ogImage = `/og/${entry.id}.webp`;
 const ogDescription =
@@ -52,6 +53,18 @@ const ratingText = RATING_TEXT[r];
 const titleCase = (s: string) => s.replaceAll('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
 const similarReviews = getSimilarReviews(entry, allEntries, 4);
+const hasBookTag = entry.data.tags.some((tag) => BOOK_TAGS.includes(tag as (typeof BOOK_TAGS)[number]));
+const hasStatusTag = entry.data.tags.some((tag) => STATUS_TAGS.includes(tag as (typeof STATUS_TAGS)[number]));
+const hasFormatTag = entry.data.tags.some((tag) => FORMAT_TAGS.includes(tag as (typeof FORMAT_TAGS)[number]));
+const yearTag = String(entry.data.date.getFullYear());
+
+const reviewTags = sortReviewTags([
+  ...entry.data.tags.filter((tag) => !SOURCE_TAGS.includes(tag as SourceTag)),
+  ...(!hasBookTag ? [BOOK_TAG] : []),
+  ...(!hasStatusTag ? [DEFAULT_STATUS_TAG] : []),
+  ...(!hasFormatTag ? [DEFAULT_FORMAT_TAG] : []),
+  yearTag,
+]);
 
 const specialTags = [
   ...BOOK_TAGS,
@@ -126,6 +139,11 @@ const reviewMarkdown =
                     {tag}
                   </li>
                 ))}
+                {entry.data.serieswordcount != null && (
+                  <li class="square-review-tag tag-wordcount inline-flex text-center py-1 px-3 rounded">
+                    {formatWordCount(entry.data.serieswordcount)} words
+                  </li>
+                )}
               </ul>
               <div class="text-base flex flex-wrap justify-center md:justify-start">
                 {Object.entries(entry.data.links).map(([name, link]) => (
