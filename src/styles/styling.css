@@ -282,7 +282,7 @@
   }
 
   p, ul, li, em, strong, a {
-    @apply text-[1.625rem] sm:text-[2rem] leading-snug sm:leading-normal;
+    @apply text-[1.5rem] sm:text-[2rem] leading-snug sm:leading-normal;
   }
 
   blockquote p {
