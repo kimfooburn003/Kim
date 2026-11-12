@@ -245,17 +245,17 @@
     }
   }
 
-.blog-post .review-summary ul.review-card-tags {
+.review-summary ul.review-card-tags {
   max-width: none;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+   margin: 0;
+   padding: 0;
+   list-style: none;
 }
 
-@media (min-width: 640px) {
+.review-summary ul.review-card-tags > li {
   padding: 0.125rem 0.5rem;
-  font-size: 0.625rem !important;
-  line-height: 0.75rem !important;
+  font-size: 0.625rem;
+  line-height: 0.75rem;
 }
  
   /* Review pages: make H2/H3 align with the paragraph body */
