@@ -254,8 +254,8 @@
 
 .review-summary ul.review-card-tags > li {
   padding: 0.125rem 0.5rem;
-  font-size: 0.625rem;
-  line-height: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
  
   /* Review pages: make H2/H3 align with the paragraph body */
