@@ -253,7 +253,7 @@
 }
 
 .review-summary ul.review-card-tags > li {
-  padding: 0.125rem 0.5rem;
+  padding: py-1 px-2.5;
   /* font-size: 0.75rem;
   line-height: 1rem; */
   @apply text-sm;
