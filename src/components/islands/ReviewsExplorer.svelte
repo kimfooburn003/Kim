@@ -274,6 +274,12 @@
     return abslink.replace(/\/$/, '').split('/').pop() ?? abslink;
   }
 
+	function parseWordCount(value: string): number | null {
+    if (!value.trim()) return null;
+    const parsed = Number(value);
+    return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
+  }
+
   // Read URL state synchronously so we don't flash unfiltered cards on mount.
   function readInitialState(): {
     layout: Layout;
@@ -289,6 +295,8 @@
     completionFilter: CompletionFilter;
     sourceActivations: Record<SourceTag, boolean>;
     bookFilter: BookFilter;
+		minWordCount: string;
+    maxWordCount: string;
   } {
     const out = {
       layout: defaultLayout,
@@ -309,6 +317,8 @@
         SOURCE_TAGS.map((tag) => [tag, true])
       ) as Record<SourceTag, boolean>,
       bookFilter: 'series' as BookFilter,
+			minWordCount: '',
+      maxWordCount: '',
     };
     if (typeof window === 'undefined') return out;
     const params = new URLSearchParams(window.location.search);
@@ -370,6 +380,10 @@
         out.bookFilter = book;
       }
     }
+    const minWordCount = params.get('min-words') ?? '';
+    const maxWordCount = params.get('max-words') ?? '';
+    if (parseWordCount(minWordCount) !== null) out.minWordCount = minWordCount;
+    if (parseWordCount(maxWordCount) !== null) out.maxWordCount = maxWordCount;
     if (params.has('include')) {
       for (const t of params.get('include')!.split('_').filter(Boolean)) {
         out.activations[t] = true;
@@ -420,6 +434,9 @@
   let completionFilter = $state<CompletionFilter>(initial.completionFilter);
   let sourceActivations = $state<Record<SourceTag, boolean>>({ ...initial.sourceActivations });
   let bookFilter = $state<BookFilter>(initial.bookFilter);
+	let minWordCount = $state(initial.minWordCount);
+  let maxWordCount = $state(initial.maxWordCount);
+  let wordCountDropdownOpen = $state(false);
 
   // Sync state → URL whenever any of these change.
   $effect(() => {
@@ -429,7 +446,11 @@
     if (layout !== defaultLayout) params.set('l', layout);
     if (completionFilter !== 'all') params.set('status', completionFilter);
     if (bookFilter !== 'all') params.set('book', bookFilter);
-  
+  	const minWords = parseWordCount(minWordCount);
+    const maxWords = parseWordCount(maxWordCount);
+    if (minWords !== null) params.set('min-words', String(minWords));
+    if (maxWords !== null) params.set('max-words', String(maxWords));
+
     const sourceInclude: string[] = [];
     const sourceExclude: string[] = [];
     for (const [k, v] of Object.entries(sourceActivations)) {
@@ -577,6 +598,9 @@
     protagonistActivations = {};
     progressionActivations = {};
     yearActivations = {};
+		minWordCount = '';
+    maxWordCount = '';
+    wordCountDropdownOpen = false;
     searchTerm = '';
     layout = defaultLayout;
     byRank = true;
@@ -642,6 +666,14 @@
         }
         if (bookFilter === SERIES_TAG && !post.tags.includes(SERIES_TAG)) {
           return false;
+        }
+				const minWords = parseWordCount(minWordCount);
+        const maxWords = parseWordCount(maxWordCount);
+        if (minWords !== null || maxWords !== null) {
+          const wordCount = post.serieswordcount;
+          if (wordCount == null) return false;
+          if (minWords !== null && wordCount < minWords) return false;
+          if (maxWords !== null && wordCount > maxWords) return false;
         }
         const includedSources = Object.entries(sourceActivations)
           .filter(
@@ -1017,6 +1049,74 @@
         </div>
       {/if}
      </div>
+    </div>
+	 <div class="year-filter-group">
+      <button
+        type="button"
+        class={`year-filter-all ${minWordCount || maxWordCount ? '' : 'is-active'}`}
+        aria-label="Clear word count limits"
+        aria-pressed={!minWordCount && !maxWordCount}
+        onclick={() => {
+          minWordCount = '';
+          maxWordCount = '';
+          wordCountDropdownOpen = false;
+        }}
+      >
+        All
+      </button>
+      <div class="year-dropdown">
+        <button
+          id="word-count-filter"
+          type="button"
+          class={`year-dropdown-trigger inline-flex items-center gap-2 ${minWordCount || maxWordCount ? 'is-active' : ''}`}
+          aria-haspopup="dialog"
+          aria-expanded={wordCountDropdownOpen}
+          onclick={() => (wordCountDropdownOpen = !wordCountDropdownOpen)}
+        >
+          Word count
+          <svg
+            class="h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        {#if wordCountDropdownOpen}
+          <div
+            class="year-dropdown-options min-w-64"
+            role="dialog"
+            aria-labelledby="word-count-filter"
+          >
+            <label class="block py-2 px-3">
+              <span class="block mb-1">More than (words)</span>
+              <input
+                type="number"
+                min="0"
+                step="10000"
+                bind:value={minWordCount}
+                class="w-full rounded-md bg-green-900 px-2 py-1 text-green-50"
+              />
+            </label>
+            <label class="block py-2 px-3">
+              <span class="block mb-1">Less than (words)</span>
+              <input
+                type="number"
+                min="0"
+                step="10000"
+                bind:value={maxWordCount}
+                class="w-full rounded-md bg-green-900 px-2 py-1 text-green-50"
+              />
+            </label>
+          </div>
+        {/if}
+      </div>
     </div>
 
     {#if readingList.size > 0}
