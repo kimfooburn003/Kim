@@ -181,7 +181,9 @@ const reviewMarkdown =
                     ))}
                     {entry.data.serieswordcount != null && (
                       <li class="square-review-tag tag-wordcount inline-flex text-center rounded">
-                        {formatWordCount(entry.data.serieswordcount)} words
+                        <span class="block py-1 px-2.5 text-sm">
+                          {formatWordCount(entry.data.serieswordcount)} words
+                        </span>
                       </li>
                     )}
                   </ul>
