@@ -286,7 +286,7 @@ body {
          whitespace-nowrap text-green-50;
 }
 .word-count-input {
-  @apply w-28 rounded-none bg-green-700 px-2 py-2 text-green-400
+  @apply w-28 bg-green-700 px-2 py-2 text-green-400
           outline-none focus:text-green-100 focus:ring-2 focus:ring-green-400;
    appearance: auto;
    color-scheme: dark;
@@ -294,9 +294,12 @@ body {
 .word-count-input + .word-count-input {
   @apply border-l border-green-500;
 }
-word-count-input:last-child {
-  @apply rounded-r-md;
+.word-count-input:first-of-type {
+  border-radius: 0.375rem 0 0 0.375rem;
 }
+.word-count-input:last-child {
+  border-radius: 0 0.375rem 0.375rem 0;
+ }
 
 .year-filter-group {
   @apply inline-flex items-center m-2;
