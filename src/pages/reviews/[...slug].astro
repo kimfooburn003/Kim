@@ -68,8 +68,10 @@ const reviewTags = sortReviewTags([
 ]);
 
 const reviewIndexUrl = new URL(withBase('/reviews/'), Astro.site!);
-const filterUrlForTag = (tag: string) => {
-  const params = new URLSearchParams({
+const filterUrlForTag = (tag: string, resetFilters = true) => {
+  const params = resetFilters
+    ? new URLSearchParams()
+    : new URLSearchParams({
     book: 'series',
     source: SOURCE_TAGS.join('_'),
     format: 'novel_webnovel',
@@ -159,14 +161,14 @@ const reviewMarkdown =
               <ul class="review-card-tags flex flex-wrap gap-2 text-xs font-medium justify-center md:justify-start">
                 {reviewTags.filter((tag) => !isSquareReviewTag(tag)).map((tag) => (
                   <li class={`inline-flex text-center rounded-full ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
-                    <a class="review-tag-link no-under" href={filterUrlForTag(tag)} aria-label={`Filter reviews by ${tag}`}>
+                    <a class="review-tag-link no-under" href={filterUrlForTag(tag, true)} aria-label={`Filter reviews by ${tag}`}>
                       {tag === 'royal-road' ? 'royal road' : tag}
                     </a>
                   </li>
                 ))}
                 {reviewTags.filter(isSquareReviewTag).map((tag) => (
                   <li class={`square-review-tag inline-flex text-center rounded ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
-                    <a class="review-tag-link no-under" href={filterUrlForTag(tag)} aria-label={`Filter reviews by ${tag}`}>
+                    <a class="review-tag-link no-under" href={filterUrlForTag(tag, true)} aria-label={`Filter reviews by ${tag}`}>
                       {tag}
                     </a>
                   </li>
