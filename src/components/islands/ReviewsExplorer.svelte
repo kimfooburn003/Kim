@@ -1157,7 +1157,7 @@
       id="search-input"
       name="search"
       bind:value={searchTerm}
-      class="bg-green-700 rounded-md text-green-400 m-2 focus:text-green-100 outline-none focus:ring-2 focus:ring-green-400"
+      class="bg-green-700 rounded-md text-green-400 m-2 focus:text-green-100 outline-none focus:ring-2 focus:ring-inset focus:ring-green-400"
       placeholder="Search..."
     />
 
