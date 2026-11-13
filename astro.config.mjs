@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { SITE_DOMAIN, SITE_BASE } from './src/config.ts';
 import svelte from '@astrojs/svelte';
 import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
@@ -16,8 +17,8 @@ import { contentAssets } from './scripts/content-assets.mjs';
 const redirects = await collectRedirects();
 
 export default defineConfig({
-  site: 'https://flamegarnet89.github.io/Kim',
-  base: '/Kim/',
+  site: SITE_DOMAIN,
+  base: SITE_BASE,
   output: 'static',
   // 'ignore' keeps the published file layout identical (every page becomes a
   // directory with index.html) but lets the dev server accept both `/foo` and
