@@ -462,24 +462,19 @@
 }
 
 .review-summary ul.review-card-tags > li {
-  @apply py-1 px-2.5 text-sm;
+  @apply text-sm;
 }
 
 .review-card-tags .review-tag-link {
-  display: block;
-  color: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  text-decoration: none;
+  @apply block py-1 px-2.5 text-sm text-inherit no-underline;
 }
 
 .review-card-tags .review-tag-link:hover {
-  filter: brightness(1.12);
+  @apply brightness-110;
 }
 
 .review-card-tags .review-tag-link:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  @apply outline-2 outline-offset-2 outline-current;
 }
 
 /* .series-word-count-tags > .series-wordcount-tag {
