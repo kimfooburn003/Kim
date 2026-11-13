@@ -433,7 +433,6 @@
 .tag-2031,
   
 .tag-wordcount {
-  /* @apply text-green-50 border-1 border-green-400/80 bg-green-800/70 font-medium; */
   @apply text-green-900 border-1 border-green-500 bg-green-300 font-medium;
 }    
 
@@ -441,40 +440,21 @@
 .review-card-tags > .review-tag-light {
   @apply text-cream-50 bg-cream-600/90 font-medium;
 }
-/* .review-card-tags > .review-tag-light {
-  @apply text-cream-900 bg-cream-300/90 font-medium;
-} */
-
 .review-card-tags > .square-review-tag {
   @apply text-green-50 bg-green-400/55 font-medium;
 }
-
-/* .review-card-tags > .square-review-tag:nth-child(odd of .square-review-tag) {
-  @apply text-green-50 bg-green-400/55 font-medium;
-}
-.review-card-tags > .square-review-tag:nth-child(even of .square-review-tag) {
-  @apply text-green-900 bg-green-300/95 font-medium;
-} */
-
 .review-summary ul.review-card-tags {
-   max-width: none;
-   margin: 0;
-   padding: 0;
-   list-style: none;
+   @apply max-w-none m-0 p-0 list-none;
 }
-
 .review-summary ul.review-card-tags > li {
   @apply text-sm;
 }
-
 .review-card-tags .review-tag-link {
   @apply block py-1 px-2.5 text-sm text-inherit no-underline;
 }
-
 .review-card-tags .review-tag-link:hover {
   @apply brightness-110;
 }
-
 .review-card-tags .review-tag-link:focus-visible {
   @apply outline-2 outline-offset-2 outline-current;
 }
