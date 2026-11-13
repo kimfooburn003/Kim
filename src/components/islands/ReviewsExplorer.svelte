@@ -1055,8 +1055,7 @@
      </div>
     </div>
 	 <div class="year-filter-group">
-		<div class="word-count-control">
-  		<span>Word count</span>
+		<div class="word-count-control">  		
         <input
 					bind:this={minWordCountInput}
           type="number"
@@ -1068,6 +1067,7 @@
     			placeholder="Min"
 					class="word-count-input"
         />
+				<span>Wordcount</span>
         <input
 					bind:this={maxWordCountInput}
           type="number"
