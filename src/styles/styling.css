@@ -440,7 +440,7 @@
 .review-card-tags .review-tag-light {
   @apply text-cream-50 bg-cream-600/90 font-medium;
 }
-.review-card-tags > .square-review-tag {
+.review-card-tags .square-review-tag {
   @apply text-green-50 bg-green-400/55 font-medium;
 }
 .review-summary ul.review-card-tags,
