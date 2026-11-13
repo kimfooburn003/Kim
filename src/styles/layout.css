@@ -291,6 +291,10 @@ body {
   appearance: auto;
   color-scheme: dark;
 }
+.word-count-input:focus {
+  position: relative;
+  z-index: 1;
+}
 .word-count-min {
   border-radius: 0.375rem 0 0 0.375rem;
 }
