@@ -158,26 +158,34 @@ const reviewMarkdown =
                 <p class={`larger rating-${r}`}>{ratingText}</p>
               </div>
               <p class="text-lg text-green-400">{entry.data.description}</p>
-              <ul class="review-card-tags flex flex-wrap gap-2 text-xs font-medium justify-center md:justify-start">
-                {reviewTags.filter((tag) => !isSquareReviewTag(tag)).map((tag) => (
-                  <li class={`inline-flex text-center rounded-full ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
-                    <a class="review-tag-link no-under" href={filterUrlForTag(tag, true)} aria-label={`Filter reviews by ${tag}`}>
-                      {tag === 'royal-road' ? 'royal road' : tag}
-                    </a>
-                  </li>
-                ))}
-                {reviewTags.filter(isSquareReviewTag).map((tag) => (
-                  <li class={`square-review-tag inline-flex text-center rounded ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
-                    <a class="review-tag-link no-under" href={filterUrlForTag(tag, true)} aria-label={`Filter reviews by ${tag}`}>
-                      {tag}
-                    </a>
-                  </li>
-                ))}
-                {entry.data.serieswordcount != null && (
-                  <li class="square-review-tag tag-wordcount inline-flex text-center rounded">
-                    {formatWordCount(entry.data.serieswordcount)} words
-                  </li>
-                )}
+              <ul class="review-card-tags flex flex-col gap-2 text-xs font-medium justify-center md:justify-start">
+                <li class="w-full">
+                  <ul class="flex flex-wrap gap-2">
+                    {reviewTags.filter((tag) => !isSquareReviewTag(tag)).map((tag) => (
+                      <li class={`inline-flex text-center rounded-full ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                        <a class="review-tag-link no-under" href={filterUrlForTag(tag)}>
+                          {tag === 'royal-road' ? 'royal road' : tag}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+                <li class="w-full">
+                  <ul class="flex flex-wrap gap-2">
+                    {reviewTags.filter(isSquareReviewTag).map((tag) => (
+                      <li class={`square-review-tag inline-flex text-center rounded ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
+                        <a class="review-tag-link no-under" href={filterUrlForTag(tag)}>
+                          {tag}
+                        </a>
+                      </li>
+                    ))}
+                    {entry.data.serieswordcount != null && (
+                      <li class="square-review-tag tag-wordcount inline-flex text-center rounded">
+                        {formatWordCount(entry.data.serieswordcount)} words
+                      </li>
+                    )}
+                  </ul>
+                </li>
               </ul>
               <div class="text-base flex flex-wrap justify-center md:justify-start">
                 {Object.entries(entry.data.links).map(([name, link]) => (
