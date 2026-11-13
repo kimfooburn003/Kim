@@ -278,6 +278,15 @@ body {
   @apply text-cream-900 bg-cream-300/90 font-medium;
 }
 
+.word-count-control {
+  @apply inline-flex items-center gap-2 m-1 rounded-md
+         bg-green-700 px-3 py-2 text-green-50
+         hover:bg-green-500;
+}
+.word-count-input {
+  @apply w-28 rounded-md bg-green-900 px-2 py-1 text-green-50;
+}
+
 .year-filter-group {
   @apply inline-flex items-center m-2;
 }
