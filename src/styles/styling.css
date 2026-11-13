@@ -471,6 +471,8 @@
 .review-card-tags .review-tag-link {
   display: block;
   color: inherit;
+  font-size: inherit;
+  line-height: inherit;
   text-decoration: none;
 }
 
