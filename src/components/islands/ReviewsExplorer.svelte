@@ -436,7 +436,6 @@
   let bookFilter = $state<BookFilter>(initial.bookFilter);
 	let minWordCount = $state(initial.minWordCount);
   let maxWordCount = $state(initial.maxWordCount);
-  let wordCountDropdownOpen = $state(false);
 
   // Sync state → URL whenever any of these change.
   $effect(() => {
@@ -1059,64 +1058,32 @@
         onclick={() => {
           minWordCount = '';
           maxWordCount = '';
-          wordCountDropdownOpen = false;
         }}
       >
         All
       </button>
-      <div class="year-dropdown">
-        <button
-          id="word-count-filter"
-          type="button"
-          class={`year-dropdown-trigger inline-flex items-center gap-2 ${minWordCount || maxWordCount ? 'is-active' : ''}`}
-          aria-haspopup="dialog"
-          aria-expanded={wordCountDropdownOpen}
-          onclick={() => (wordCountDropdownOpen = !wordCountDropdownOpen)}
-        >
-          Word count
-          <svg
-            class="h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </button>
-        {#if wordCountDropdownOpen}
-          <div
-            class="year-dropdown-options min-w-64"
-            role="dialog"
-            aria-labelledby="word-count-filter"
-          >
-            <label class="block py-2 px-3">
-              <span class="block mb-1">More than (words)</span>
-              <input
-                type="number"
-                min="0"
-                step="10000"
-                bind:value={minWordCount}
-                class="w-full rounded-md bg-green-900 px-2 py-1 text-green-50"
-              />
-            </label>
-            <label class="block py-2 px-3">
-              <span class="block mb-1">Less than (words)</span>
-              <input
-                type="number"
-                min="0"
-                step="10000"
-                bind:value={maxWordCount}
-                class="w-full rounded-md bg-green-900 px-2 py-1 text-green-50"
-              />
-            </label>
-          </div>
-        {/if}
-      </div>
+ 	  <label class="inline-flex items-center gap-2">
+        <span>Min words</span>
+        <input
+          type="number"
+          min="0"
+          step="10000"
+          bind:value={minWordCount}
+          aria-label="Minimum word count"
+          class="w-28 rounded-md bg-green-900 px-2 py-1 text-green-50"
+        />
+      </label>
+      <label class="inline-flex items-center gap-2">
+        <span>Max words</span>
+        <input
+          type="number"
+          min="0"
+          step="10000"
+          bind:value={maxWordCount}
+          aria-label="Maximum word count"
+         class="w-28 rounded-md bg-green-900 px-2 py-1 text-green-50"
+        />
+      </label>
     </div>
 
     {#if readingList.size > 0}
