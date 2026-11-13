@@ -468,6 +468,21 @@
   @apply text-green-900 bg-green-300/95 font-medium;
 }
 
+.review-card-tags .review-tag-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.review-card-tags .review-tag-link:hover {
+  filter: brightness(1.12);
+}
+
+.review-card-tags .review-tag-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 /* .series-word-count-tags > .series-wordcount-tag {
   @apply text-green-900 border-1 border-green-500 bg-green-300 font-medium;
 } */
