@@ -17,7 +17,7 @@ import {
   STATUS_TAGS,
   isSquareReviewTag,
   sortReviewTags,
-  type SourceTag,
+  //type SourceTag,
 } from '../../lib/review-tags';
 import { formatWordCount } from '../../lib/wordcount';
 import { withBase } from '../../config';
@@ -60,12 +60,39 @@ const hasFormatTag = entry.data.tags.some((tag) => FORMAT_TAGS.includes(tag as (
 const yearTag = String(entry.data.date.getFullYear());
 
 const reviewTags = sortReviewTags([
-  ...entry.data.tags.filter((tag) => !SOURCE_TAGS.includes(tag as SourceTag)),
+  ...entry.data.tags,
   ...(!hasBookTag ? [BOOK_TAG] : []),
   ...(!hasStatusTag ? [DEFAULT_STATUS_TAG] : []),
   ...(!hasFormatTag ? [DEFAULT_FORMAT_TAG] : []),
   yearTag,
 ]);
+
+const reviewIndexUrl = new URL(withBase('/reviews/'), Astro.site!);
+const filterUrlForTag = (tag: string) => {
+  const params = new URLSearchParams({
+    book: 'series',
+    source: SOURCE_TAGS.join('_'),
+    format: 'novel_webnovel',
+    include: 'litrpg',
+  });
+  const addTag = (key: string) => {
+    const values = new Set((params.get(key) ?? '').split('_').filter(Boolean));
+    values.add(tag);
+    params.set(key, [...values].join('_'));
+  };
+
+  if (BOOK_TAGS.some((value) => value === tag)) params.set('book', tag);
+  else if (STATUS_TAGS.some((value) => value === tag)) params.set('status', tag);
+  else if (SOURCE_TAGS.some((value) => value === tag)) addTag('source');
+  else if (FORMAT_TAGS.some((value) => value === tag)) addTag('format');
+  else if (/^\d{4}$/.test(tag)) addTag('year');
+  else if (PROGRESSION_TAGS.some((value) => value === tag)) addTag('progression');
+  else if (PROTAGONIST_TAGS.some((value) => value === tag)) addTag('protagonist');
+  else addTag('include');
+
+  reviewIndexUrl.search = params.toString();
+  return reviewIndexUrl.toString();
+};
 
 const specialTags = [
   ...BOOK_TAGS,
@@ -132,12 +159,16 @@ const reviewMarkdown =
               <ul class="review-card-tags flex flex-wrap gap-2 text-xs font-medium justify-center md:justify-start">
                 {reviewTags.filter((tag) => !isSquareReviewTag(tag)).map((tag) => (
                   <li class={`inline-flex text-center rounded-full ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
-                    {tag === 'royal-road' ? 'royal road' : tag}
+                    <a class="review-tag-link no-under" href={filterUrlForTag(tag)} aria-label={`Filter reviews by ${tag}`}>
+                      {tag === 'royal-road' ? 'royal road' : tag}
+                    </a>
                   </li>
                 ))}
                 {reviewTags.filter(isSquareReviewTag).map((tag) => (
                   <li class={`square-review-tag inline-flex text-center rounded ${tagColorClasses[tag] ?? ''} tag-${tag}`}>
-                    {tag}
+                    <a class="review-tag-link no-under" href={filterUrlForTag(tag)} aria-label={`Filter reviews by ${tag}`}>
+                      {tag}
+                    </a>
                   </li>
                 ))}
                 {entry.data.serieswordcount != null && (
