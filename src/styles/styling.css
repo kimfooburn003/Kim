@@ -437,25 +437,27 @@
   @apply text-green-900 border-1 border-green-500 bg-green-300 font-medium;
 }    
 
-/* Match the default alternating colors used by the ReviewsExplorer filters. */
-.review-card-tags > .review-tag-dark {
+.review-card-tags > .review-tag-dark,
+.review-card-tags > .review-tag-light {
   @apply text-cream-50 bg-cream-600/90 font-medium;
 }
-
-.review-card-tags > .review-tag-light {
+/* .review-card-tags > .review-tag-light {
   @apply text-cream-900 bg-cream-300/90 font-medium;
-}
+} */
 
-.review-card-tags > .square-review-tag:nth-child(odd of .square-review-tag) {
+.review-card-tags > .square-review-tag {
   @apply text-green-50 bg-green-400/55 font-medium;
 }
 
+/* .review-card-tags > .square-review-tag:nth-child(odd of .square-review-tag) {
+  @apply text-green-50 bg-green-400/55 font-medium;
+}
 .review-card-tags > .square-review-tag:nth-child(even of .square-review-tag) {
   @apply text-green-900 bg-green-300/95 font-medium;
-}
+} */
 
 .review-summary ul.review-card-tags {
-  max-width: none;
+   max-width: none;
    margin: 0;
    padding: 0;
    list-style: none;
@@ -476,10 +478,6 @@
 .review-card-tags .review-tag-link:focus-visible {
   @apply outline-2 outline-offset-2 outline-current;
 }
-
-/* .series-word-count-tags > .series-wordcount-tag {
-  @apply text-green-900 border-1 border-green-500 bg-green-300 font-medium;
-} */
   
 /* Turn white images to dark mode */
 .img-invert {
