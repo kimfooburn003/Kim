@@ -434,8 +434,10 @@
   let completionFilter = $state<CompletionFilter>(initial.completionFilter);
   let sourceActivations = $state<Record<SourceTag, boolean>>({ ...initial.sourceActivations });
   let bookFilter = $state<BookFilter>(initial.bookFilter);
-	let minWordCount = $state(initial.minWordCount);
+  let minWordCount = $state(initial.minWordCount);
   let maxWordCount = $state(initial.maxWordCount);
+	let minWordCountInput: HTMLInputElement;
+  let maxWordCountInput: HTMLInputElement;
 
   // Sync state → URL whenever any of these change.
   $effect(() => {
@@ -592,7 +594,7 @@
     }
   }
 
-  function reset() {
+  async function reset() {
     tagActivations = {};
     protagonistActivations = {};
     progressionActivations = {};
@@ -611,6 +613,10 @@
       allAvailableSourceTags.map((tag) => [tag, true])
     ) as Record<SourceTag, boolean>;
     bookFilter = SERIES_TAG;
+
+		await tick();
+    minWordCountInput.value = '';
+    maxWordCountInput.value = '';
   }
 
   // Screenshot export: capture the whole card list (not just the viewport)
@@ -1065,6 +1071,7 @@
 		<label class="word-count-control">
         <span>Min words</span>
         <input
+					bind:this={minWordCountInput}
           type="number"
           min="0"
           step="10000"
@@ -1076,6 +1083,7 @@
       <label class="word-count-control">
         <span>Max words</span>
         <input
+					bind:this={maxWordCountInput}
           type="number"
           min="0"
           step="10000"
