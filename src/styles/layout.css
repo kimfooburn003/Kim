@@ -282,7 +282,7 @@ body {
   @apply inline-flex items-stretch m-1;
 }
 .word-count-label {
-  @apply inline-flex items-center rounded-l-md bg-green-500 px-3 py-2
+  @apply inline-flex items-center bg-green-500 px-3 py-2
          whitespace-nowrap text-green-50;
 }
 .word-count-input {
