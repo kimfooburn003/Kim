@@ -1065,7 +1065,7 @@
   				oninput={(event) => (minWordCount = event.currentTarget.value)}
           aria-label="Minimum word count"
     			placeholder="Min"
-					class="word-count-input"
+					class="word-count-input word-count-min"
         />
 				<span class="word-count-label">Word Count</span>
         <input
@@ -1077,7 +1077,7 @@
 				  oninput={(event) => (maxWordCount = event.currentTarget.value)}
           aria-label="Maximum word count"
     			placeholder="Max"
-          class="word-count-input"
+          class="word-count-input word-count-max"
         />
       </div>
     </div>
