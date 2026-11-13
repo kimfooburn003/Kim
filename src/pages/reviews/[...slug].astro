@@ -68,6 +68,11 @@ const reviewTags = sortReviewTags([
 ]);
 
 const reviewIndexUrl = new URL(withBase('/reviews/'), Astro.site!);
+const wordCountFilterUrl = (wordCount: number) => {
+  const url = new URL(reviewIndexUrl);
+  url.searchParams.set('max-words', String(wordCount));
+  return url.toString();
+};
 const filterUrlForTag = (tag: string, resetFilters = true) => {
   const params = resetFilters
     ? new URLSearchParams()
@@ -181,9 +186,12 @@ const reviewMarkdown =
                     ))}
                     {entry.data.serieswordcount != null && (
                       <li class="square-review-tag tag-wordcount inline-flex text-center rounded">
-                        <span class="block py-1 px-2.5 text-sm">
+                        <a
+                          class="review-tag-link no-under"
+                          href={wordCountFilterUrl(entry.data.serieswordcount)}
+                        >
                           {formatWordCount(entry.data.serieswordcount)} words
-                        </span>
+                        </a>
                       </li>
                     )}
                   </ul>
