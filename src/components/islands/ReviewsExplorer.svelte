@@ -1055,19 +1055,6 @@
      </div>
     </div>
 	 <div class="year-filter-group">
-      <button
-        type="button"
-        class={`year-filter-all ${minWordCount || maxWordCount ? '' : 'is-active'}`}
-        aria-label="Clear word count limits"
-        aria-pressed={!minWordCount && !maxWordCount}
-        onclick={() => {
-          minWordCount = '';
-          maxWordCount = '';
-        }}
-      >
-        All
-      </button>
-
 		<label class="word-count-control">
         <span>Min words</span>
         <input
