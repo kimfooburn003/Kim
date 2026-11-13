@@ -1061,7 +1061,8 @@
       >
         All
       </button>
- 	  <label class="inline-flex items-center gap-2">
+
+		<label class="word-count-control">
         <span>Min words</span>
         <input
           type="number"
@@ -1069,10 +1070,10 @@
           step="10000"
           bind:value={minWordCount}
           aria-label="Minimum word count"
-          class="w-28 rounded-md bg-green-900 px-2 py-1 text-green-50"
+					class="word-count-input"
         />
       </label>
-      <label class="inline-flex items-center gap-2">
+      <label class="word-count-control">
         <span>Max words</span>
         <input
           type="number"
@@ -1080,7 +1081,7 @@
           step="10000"
           bind:value={maxWordCount}
           aria-label="Maximum word count"
-         class="w-28 rounded-md bg-green-900 px-2 py-1 text-green-50"
+          class="word-count-input"
         />
       </label>
     </div>
