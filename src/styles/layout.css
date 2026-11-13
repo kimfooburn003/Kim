@@ -280,8 +280,7 @@ body {
 
 .word-count-control {
   @apply inline-flex items-center gap-2 m-1 rounded-md
-         bg-green-700 px-3 py-2 text-green-50
-         hover:bg-green-500;
+         bg-green-500 px-3 py-1 text-green-50;
 }
 .word-count-input {
   @apply w-28 rounded-md bg-green-900 px-2 py-1 text-green-50;
