@@ -597,9 +597,8 @@
     protagonistActivations = {};
     progressionActivations = {};
     yearActivations = {};
-		minWordCount = '';
+	minWordCount = '';
     maxWordCount = '';
-    wordCountDropdownOpen = false;
     searchTerm = '';
     layout = defaultLayout;
     byRank = true;
