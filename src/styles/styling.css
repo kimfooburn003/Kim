@@ -436,17 +436,18 @@
   @apply text-green-900 border-1 border-green-500 bg-green-300 font-medium;
 }    
 
-.review-card-tags > .review-tag-dark,
-.review-card-tags > .review-tag-light {
+.review-card-tags .review-tag-dark,
+.review-card-tags .review-tag-light {
   @apply text-cream-50 bg-cream-600/90 font-medium;
 }
 .review-card-tags > .square-review-tag {
   @apply text-green-50 bg-green-400/55 font-medium;
 }
-.review-summary ul.review-card-tags {
+.review-summary ul.review-card-tags,
+.review-summary ul.review-card-tags ul {
    @apply max-w-none m-0 p-0 list-none;
 }
-.review-summary ul.review-card-tags > li {
+.review-summary ul.review-card-tags li {
   @apply text-sm;
 }
 .review-card-tags .review-tag-link {
