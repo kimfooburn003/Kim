@@ -1075,7 +1075,8 @@
           type="number"
           min="0"
           step="10000"
-          bind:value={minWordCount}
+					value={minWordCount}
+  				oninput={(event) => (minWordCount = event.currentTarget.value)}
           aria-label="Minimum word count"
 					class="word-count-input"
         />
@@ -1087,7 +1088,8 @@
           type="number"
           min="0"
           step="10000"
-          bind:value={maxWordCount}
+					value={maxWordCount}
+				  oninput={(event) => (maxWordCount = event.currentTarget.value)}
           aria-label="Maximum word count"
           class="word-count-input"
         />
