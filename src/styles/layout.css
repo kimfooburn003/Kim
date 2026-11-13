@@ -279,10 +279,10 @@ body {
 }
 
 .word-count-control {
-  @apply inline-flex items-stretch m-1 overflow-hidden rounded-md;
+  @apply inline-flex items-stretch m-1;
 }
 .word-count-label {
-  @apply inline-flex items-center bg-green-500 px-3 py-2
+  @apply inline-flex items-center rounded-l-md bg-green-500 px-3 py-2
          whitespace-nowrap text-green-50;
 }
 .word-count-input {
@@ -293,6 +293,9 @@ body {
 }
 .word-count-input + .word-count-input {
   @apply border-l border-green-500;
+}
+word-count-input:last-child {
+  @apply rounded-r-md;
 }
 
 .year-filter-group {
