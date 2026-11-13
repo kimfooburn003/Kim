@@ -1055,8 +1055,8 @@
      </div>
     </div>
 	 <div class="year-filter-group">
-		<label class="word-count-control">
-        <span>Min words</span>
+		<div class="word-count-control">
+  		<span>Word count</span>
         <input
 					bind:this={minWordCountInput}
           type="number"
@@ -1065,11 +1065,9 @@
 					value={minWordCount}
   				oninput={(event) => (minWordCount = event.currentTarget.value)}
           aria-label="Minimum word count"
+    			placeholder="Min"
 					class="word-count-input"
         />
-      </label>
-      <label class="word-count-control">
-        <span>Max words</span>
         <input
 					bind:this={maxWordCountInput}
           type="number"
@@ -1078,9 +1076,10 @@
 					value={maxWordCount}
 				  oninput={(event) => (maxWordCount = event.currentTarget.value)}
           aria-label="Maximum word count"
+    			placeholder="Max"
           class="word-count-input"
         />
-      </label>
+      </div>
     </div>
 
     {#if readingList.size > 0}
