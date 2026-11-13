@@ -1067,7 +1067,7 @@
     			placeholder="Min"
 					class="word-count-input"
         />
-				<span>Wordcount</span>
+				<span class="word-count-label">Wordcount</span>
         <input
 					bind:this={maxWordCountInput}
           type="number"
